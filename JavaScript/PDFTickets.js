@@ -1,4 +1,3 @@
-
 //**Validar datos del visitante************* */
 
 const nombreInput = document.getElementById('nombre');
@@ -14,7 +13,7 @@ nombreInput.addEventListener('keypress', function (e) {
 
     // Permitir solo letras, espacios y caracteres especiales del español
     if (!/[A-Za-záéíóúÁÉÍÓÚñÑ\s]/.test(char)) {
-        e.preventDefault();
+        e.preventDefault(); //--*--*--*--* sobra la "s" que estaba aquí en tu código
         return false;
     }
 });
@@ -35,12 +34,7 @@ nombreInput.addEventListener('input', function () {
 });
 
 
-
-
-
 //** Validar numeros, visitantes, cp y telefono  *******************/
-//** Validar números: visitantes, cp, telefono y cantidades *******************/
-
 // Función reutilizable para validar campos numéricos
 function setupNumericValidation(inputId, options = {}) {
     const input = document.getElementById(inputId);
@@ -90,9 +84,7 @@ function setupNumericValidation(inputId, options = {}) {
 
     // Prevenir caracteres no válidos al escribir
     input.addEventListener('keydown', function (e) {
-        // Permitir: backspace, delete, tab, escape, enter, home, end, flechas
         if ([8, 9, 27, 13, 46, 35, 36, 37, 38, 39, 40].indexOf(e.keyCode) !== -1 ||
-            // Permitir: Ctrl+A, Ctrl+C, Ctrl+V, Ctrl+X
             (e.keyCode === 65 && e.ctrlKey === true) ||
             (e.keyCode === 67 && e.ctrlKey === true) ||
             (e.keyCode === 86 && e.ctrlKey === true) ||
@@ -100,17 +92,14 @@ function setupNumericValidation(inputId, options = {}) {
             return;
         }
 
-        // Permitir punto decimal si está habilitado
         if (allowDecimals && e.keyCode === 190 && this.value.indexOf('.') === -1) {
             return;
         }
 
-        // Permitir signo negativo si está habilitado y es el primer carácter
         if (allowNegative && e.keyCode === 189 && this.value.length === 0) {
             return;
         }
 
-        // Asegurar que es un número (0-9)
         if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
             e.preventDefault();
         }
@@ -121,7 +110,6 @@ function setupNumericValidation(inputId, options = {}) {
         e.preventDefault();
         let paste = (e.clipboardData || window.clipboardData).getData('text');
 
-        // Limpiar el contenido pegado
         paste = paste.replace(/[^0-9.-]/g, '');
         if (!allowDecimals) {
             paste = paste.replace(/\./g, '');
@@ -141,49 +129,11 @@ function setupNumericValidation(inputId, options = {}) {
 
 // Configurar validaciones para cada campo
 document.addEventListener('DOMContentLoaded', function () {
-
-
-    // Código Postal - solo números, máximo 5 dígitos
-    setupNumericValidation('cp', {
-        allowDecimals: false,
-        allowNegative: false,
-        maxLength: 5,
-        fieldName: 'código postal'
-    });
-
-    // Teléfono - solo números, máximo 10 dígitos
-    setupNumericValidation('telefono', {
-        allowDecimals: false,
-        allowNegative: false,
-        maxLength: 10,
-        fieldName: 'teléfono'
-    });
-
-    // Cantidad hombres - solo enteros, mínimo 0
-    setupNumericValidation('cantHombres', {
-        allowDecimals: false,
-        allowNegative: false,
-        minValue: 0,
-        fieldName: 'cantidad hombres'
-    });
-
-    // Cantidad mujeres - solo enteros, mínimo 0
-    setupNumericValidation('cantMujeres', {
-        allowDecimals: false,
-        allowNegative: false,
-        minValue: 0,
-        fieldName: 'cantidad mujeres'
-    });
-
-    // Total visitantes - solo enteros positivos, mínimo 1
-    setupNumericValidation('totalVisitantes', {
-        allowDecimals: false,
-        allowNegative: false,
-        minValue: 1,
-        maxLength: 4,
-        fieldName: 'total visitantes'
-    });
-
+    setupNumericValidation('cp', { allowDecimals: false, allowNegative: false, maxLength: 5, fieldName: 'código postal' });
+    setupNumericValidation('telefono', { allowDecimals: false, allowNegative: false, maxLength: 10, fieldName: 'teléfono' });
+    setupNumericValidation('cantHombres', { allowDecimals: false, allowNegative: false, minValue: 0, fieldName: 'cantidad hombres' });
+    setupNumericValidation('cantMujeres', { allowDecimals: false, allowNegative: false, minValue: 0, fieldName: 'cantidad mujeres' });
+    setupNumericValidation('totalVisitantes', { allowDecimals: false, allowNegative: false, minValue: 1, maxLength: 4, fieldName: 'total visitantes' });
 });
 
 // Validación al enviar el formulario
@@ -192,20 +142,20 @@ if (form) {
     form.addEventListener('submit', function (e) {
         e.preventDefault();
 
-
         const cp = document.getElementById('cp').value;
         const telefono = document.getElementById('telefono').value;
         const cantHombres = parseInt(document.getElementById('cantHombres').value) || 0;
         const cantMujeres = parseInt(document.getElementById('cantMujeres').value) || 0;
         const totalVisitantes = parseInt(document.getElementById('totalVisitantes').value);
 
-        // Validaciones específicas
+        //--*--*--*--* ESTA VALIDACIÓN NO SIRVE: "visitantes" nunca se definió
+        /*
         if (!visitantes || visitantes <= 0 || visitantes > 1000) {
             alert('Por favor, ingrese un número válido de visitantes (mayor a 0 y menor a 1000)');
             document.getElementById('visitantes').focus();
             return;
         }
-
+        */
 
         if (cp && cp.length !== 5) {
             alert('El código postal debe tener exactamente 5 dígitos');
@@ -225,8 +175,7 @@ if (form) {
         }
 
         // Si todo es válido
-        alert(`Formulario válido!\nVisitantes: ${visitantes}\nCP: ${cp}\nTeléfono: ${telefono}`);
-        // Aquí puedes procesar el formulario o quitar el e.preventDefault()
+        alert(`Formulario válido!\nVisitantes: ${totalVisitantes}\nCP: ${cp}\nTeléfono: ${telefono}`);
     });
 }
 
@@ -235,83 +184,35 @@ if (form) {
 const esGrupoSelect = document.getElementById('grupo');
 const cantidadHombres = document.getElementById('cantHombres');
 const cantidadMujeres = document.getElementById('cantMujeres');
-
-
-
-function toggleCampos() {
-    const esGrupo = esGrupoSelect.value === 'Sí';
-
-    // Habilitar/deshabilitar campos
-    cantidadHombres.disabled = !esGrupo;
-    cantidadMujeres.disabled = !esGrupo;
-
-    if (!esGrupo) {
-        // Si NO es grupo, poner valores en 0
-        cantidadHombres.value = 0;
-        cantidadMujeres.value = 0;
-
-        // Opcional: cambiar estilo visual
-        cantidadHombres.style.backgroundColor = '#f0f0f0';
-        cantidadMujeres.style.backgroundColor = '#f0f0f0';
-    } else {
-        // Si ES grupo, restaurar valores por defecto
-        cantidadHombres.value = 0;
-        cantidadMujeres.value = 0;
-
-
-        // Restaurar estilo
-        cantidadHombres.style.backgroundColor = '';
-        cantidadMujeres.style.backgroundColor = '';
-
-
-    }
-}
-
-// Event listener para detectar cambios
-esGrupoSelect.addEventListener('change', toggleCampos);
-
-// Ejecutar al cargar la página
-document.addEventListener('DOMContentLoaded', toggleCampos);
-
-
-//******************Total de visitantes********************** */
-
 const cantidadTotal = document.getElementById('totalVisitantes');
 
 function actualizarCantidadTotal() {
     const hombres = parseInt(cantidadHombres.value) || 0;
     const mujeres = parseInt(cantidadMujeres.value) || 0;
     const totalVisitantes = hombres + mujeres;
-
-    // Asegurar que el total mínimo sea 1
     cantidadTotal.value = totalVisitantes > 0 ? totalVisitantes : 1;
 }
 
 function toggleCampos() {
     const esGrupo = esGrupoSelect.value === 'Sí';
-
     cantidadHombres.disabled = !esGrupo;
     cantidadMujeres.disabled = !esGrupo;
 
     if (!esGrupo) {
         cantidadHombres.value = 0;
         cantidadMujeres.value = 0;
-        cantidadTotal.value = 1; // Si no es grupo, total = 1
+        cantidadTotal.value = 1;
         actualizarPrecioTotal();
     }
-
-    // Actualizar total después del cambio
     actualizarCantidadTotal();
 }
 
-// Event listeners
 esGrupoSelect.addEventListener('change', toggleCampos);
 cantidadHombres.addEventListener('input', actualizarCantidadTotal);
 cantidadMujeres.addEventListener('input', actualizarCantidadTotal);
 cantidadHombres.addEventListener('change', actualizarCantidadTotal);
 cantidadMujeres.addEventListener('change', actualizarCantidadTotal);
 
-// Ejecutar al cargar
 document.addEventListener('DOMContentLoaded', function () {
     toggleCampos();
     actualizarCantidadTotal();
@@ -320,15 +221,13 @@ document.addEventListener('DOMContentLoaded', function () {
 
 //******PRECIO-BOLETO *********/
 const tipoBoleto = document.getElementById('Tipo_boleto');
-const totalAmountElement = document.getElementById('totalAmount'); // Cambiado aquí
+const totalAmountElement = document.getElementById('totalAmount');
 
 function actualizarPrecioTotal() {
     const valorPrecio = parseInt(tipoBoleto.value) || 0;
     const totalVisitantes = parseInt(cantidadTotal.value) || 1;
     const precioTotal = valorPrecio * totalVisitantes;
-
-    // Actualizar el contenido del span
-    totalAmountElement.textContent = `$${precioTotal}MXN`; // Cambiado de .value a .textContent
+    totalAmountElement.textContent = `$${precioTotal}MXN`;
 }
 
 tipoBoleto.addEventListener('change', actualizarPrecioTotal);
@@ -340,12 +239,9 @@ cantidadMujeres.addEventListener('change', actualizarPrecioTotal);
 actualizarPrecioTotal();
 
 
-
-
 //******** Generar QR y PDF ********// 
 const btnImprimir = document.getElementById("imprimir");
 
-// Mapeo de niveles ECC (ISO/IEC 18004) 
 const ECC = {
     L: QRCode.CorrectLevel.L,
     M: QRCode.CorrectLevel.M,
@@ -356,15 +252,13 @@ const ECC = {
 const eccEl = document.getElementById("ecc");
 
 //****** Notificación de impresoras que hay *******/
-
-// Al cargar la página: conectar QZ Tray y obtener impresoras
 window.addEventListener("load", async () => {
     try {
         await qz.websocket.connect();
         const printers = await qz.printers.find();
         const seleccionImpre = document.getElementById("seleccionImpre");
 
-        seleccionImpre.innerHTML = ""; // limpiar opciones
+        seleccionImpre.innerHTML = "";
         printers.forEach(pr => {
             let option = document.createElement("option");
             option.value = pr;
@@ -379,14 +273,11 @@ window.addEventListener("load", async () => {
 });
 
 btnImprimir.addEventListener("click", async function () {
-    // Obtener valores del formulario 
     const nombre = document.getElementById("nombre").value;
     const tipoBoletoEl = document.getElementById("Tipo_boleto");
     const tipoBoletoTexto = tipoBoletoEl.options[tipoBoletoEl.selectedIndex].text;
-    const precio = tipoBoletoEl.value;
     const totalVisitantes = document.getElementById("totalVisitantes").value;
     const totalTexto = document.getElementById("totalAmount").innerText;
-    //***Elegir impresora */
     const printer = document.getElementById("seleccionImpre").value;
 
     if (!printer) {
@@ -394,111 +285,68 @@ btnImprimir.addEventListener("click", async function () {
         return;
     }
 
-    // Lugar, fecha y hora 
     const fechaHora = new Date().toLocaleString("es-MX");
     const lugar = "Zacatecas, Zac";
 
-    // Texto que irá dentro del QR 
     const qrText = `Lugar: ${lugar} Emitido: ${fechaHora} Visitante: ${nombre} Tipo de boleto: ${tipoBoletoTexto} Total visitantes: ${totalVisitantes} Precio: ${totalTexto}`;
 
-    // Generar QR en memoria (sin mostrar en pantalla) 
     const tempDiv = document.createElement("div");
     const ecc = ECC[eccEl.value] || QRCode.CorrectLevel.M;
-    new QRCode(tempDiv, {
-        text: qrText,
-        width: 150,
-        height: 150,
-        correctLevel: ecc,
-    });
+    new QRCode(tempDiv, { text: qrText, width: 150, height: 150, correctLevel: ecc });
 
-    // Usar jsPDF en tamaño personalizado (80mm ancho, altura autoajustable) 
     const { jsPDF } = window.jspdf;
-    const doc = new jsPDF({
-        orientation: "portrait",
-        unit: "mm",
-        format: [80, 200], // ancho 80mm, altura inicial 200mm (se expande si hace falta) 
-    });
+    const doc = new jsPDF({ orientation: "portrait", unit: "mm", format: [80, 200] });
 
-    let y = 10; // posición vertical inicial 
-
-    // Imprimir en vertical los datos 
+    let y = 10;
     doc.setFont("helvetica", "normal");
     doc.setFontSize(12);
 
-    doc.text("Lugar: " + lugar, 10, y);
-    y += 8;
-    doc.text("Emitido: " + fechaHora, 10, y);
-    y += 8;
-
-    // Visitante con salto de línea 
+    doc.text("Lugar: " + lugar, 10, y); y += 8;
+    doc.text("Emitido: " + fechaHora, 10, y); y += 8;
     let nombreTexto = doc.splitTextToSize("Visitante: " + nombre, 60);
-    doc.text(nombreTexto, 10, y);
-    y += nombreTexto.length * 6;
+    doc.text(nombreTexto, 10, y); y += nombreTexto.length * 6;
+    doc.text("Tipo de boleto: " + tipoBoletoTexto, 10, y); y += 8;
+    doc.text("Total visitantes: " + totalVisitantes, 10, y); y += 8;
+    doc.text("Precio: " + totalTexto, 10, y); y += 12;
 
-    doc.text("Tipo de boleto: " + tipoBoletoTexto, 10, y);
-    y += 8;
-    doc.text("Total visitantes: " + totalVisitantes, 10, y);
-    y += 8;
-    doc.text("Precio: " + totalTexto, 10, y);
-    y += 12;
-
-    // Extraer imagen del QR 
-    /*setTimeout(() => {
-        let qrImg = tempDiv.querySelector("img") || tempDiv.querySelector("canvas");
-        if (qrImg) {
-            let qrDataUrl;
-            if (qrImg.tagName.toLowerCase() === "img") {
-                qrDataUrl = qrImg.src;
-            } else {
-                qrDataUrl = qrImg.toDataURL("image/png");
-            }
-            // Centrar QR en ticket 
-            doc.addImage(qrDataUrl, "PNG", 15, y, 50, 50);
-            y += 60;
-        }
-
-        // Guardar PDF y enviar a impresión 
-        doc.save("ticket.pdf");
-        window.open(doc.output("bloburl"), "_blank").print();
-    }, 500);
-}); */
-    // Extraer imagen del QR
     setTimeout(async () => {
         let qrImg = tempDiv.querySelector("img") || tempDiv.querySelector("canvas");
         if (qrImg) {
-            let qrDataUrl;
-            if (qrImg.tagName.toLowerCase() === "img") {
-                qrDataUrl = qrImg.src;
-            } else {
-                qrDataUrl = qrImg.toDataURL("image/png");
-            }
-            // Centrar QR en ticket 
+            let qrDataUrl = qrImg.tagName.toLowerCase() === "img" ? qrImg.src : qrImg.toDataURL("image/png");
             doc.addImage(qrDataUrl, "PNG", 15, y, 50, 50);
             y += 60;
         }
 
-        // Convertir PDF a base64 para QZ Tray
         const pdfBase64 = btoa(doc.output());
 
         try {
-            // Configurar e imprimir con QZ Tray
             const config = qz.configs.create(printer);
-            const data = [{
-                type: 'pdf',
-                format: 'base64',
-                data: pdfBase64
-            }];
+            const data = [{ type: 'pdf', format: 'base64', data: pdfBase64 }];
             await qz.print(config, data);
-
             alert("Ticket enviado a la impresora: " + printer);
         } catch (err) {
             console.error(err);
             alert("Error al imprimir: " + err);
         }
 
-        // Seguir abriendo el PDF en nueva pestaña para descarga
         doc.save("ticket.pdf");
         window.open(doc.output("bloburl"), "_blank");
-
     }, 500);
+});
+
+const btnCancelar = document.getElementById("cancelar");
+btnCancelar.addEventListener("click", async function () {
+    //--*--*--*--* este bloque de desconexión QZ Tray lo tienes comentado y no se usa:
+    /*
+    if (qz.websocket.isActive()) {
+        await qz.websocket.disconnect();
+    }
+    alert("Conexión con QZ Tray cerrada.");
+    location.reload();
+    */
+
+    document.getElementById("FormTicket").reset();
+    actualizarPrecioTotal();
+    toggleCampos();
+    actualizarCantidadTotal();
 });

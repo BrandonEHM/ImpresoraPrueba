@@ -60,7 +60,7 @@ button {
     text-align: center;
 }
 
-/* === GRID PRINCIPAL === */
+/*  Grind principal */
 .form-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -81,7 +81,7 @@ button {
     flex: 1;
 }
 
-/* === CAMPOS ESPECÍFICOS (para simetría) === */
+/*Campos especificos (para simetría) */
 #nombre {
     width: 100%;
 }
@@ -113,7 +113,7 @@ button {
     background-color: #fff5f5;
 }
 
-/* === SECCIÓN TOTAL === */
+/*Sección total */
 .total-section {
     padding: 15px;
     border-radius: 5px;
@@ -126,7 +126,7 @@ button {
     text-align: right;
 }
 
-/* === BOTONES === */
+/* botones */
 .buttons {
     display: flex;
     justify-content: space-between;
@@ -139,17 +139,17 @@ button {
     font-weight: bold;
 }
 
-.btn-add {
+.btn-agregar {
     background-color: #4CAF50;
     color: white;
 }
 
-.btn-print {
+.btn-imprimir {
     background-color: #2196F3;
     color: white;
 }
 
-.btn-cancel {
+.btn-cancelar {
     background-color: #f44336;
     color: white;
 }
