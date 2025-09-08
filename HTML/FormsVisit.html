@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Formulario de Visita</title>
+    <link rel="stylesheet" href="../CSS/FormsVisit.css">
+
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="flex">
+                <label>Impresora:
+                    <select id="seleccionImpre" required>
+                        <option value="" class="centrado">Cargando impresoras...</option>
+                    </select>
+                </label><br><br>
+            </div>
+
+            <h2 class="centrado">Formulario para Ticket</h2>
+
+            <div class="flex"> <!-- Agregar clase flex aquí también -->
+                <label for="ecc" class="centrado">Corrección de errores</label>
+                <select id="ecc">
+                    <option value="L">L (≈7%)</option>
+                    <option value="M" selected>M (≈15%)</option>
+                    <option value="Q">Q (≈25%)</option>
+                    <option value="H">H (≈30%)</option>
+                </select>
+            </div>
+        </div>
+        <form id="FormTicket">
+
+            <!-- Aquí va el grid de 3 columnas -->
+            <div class="form-grid">
+                <!-- Columna 1 -->
+                <div class="contenedor-columnas">
+                    <div class="form-group">
+                        <label>Visitante:
+                            <input type="text" id="nombre" placeholder="Nombre del visitante" required>
+                        </label>
+                    </div>
+
+                    <div class="form-group">
+                        <label>País:</label>
+                        <select id="pais">
+                            <option value="">Seleccione el país</option>
+                            <option>México</option>
+                            <option>EE.UU</option>
+                            <option>Canadá</option>
+                            <option>Otro</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Tipo de boleto:</label>
+                        <select id="Tipo_boleto">
+                            <option value="100">Normal (General)</option>
+                            <option value="80">Estudiante (Especial)</option>
+                            <option value="70">3ra edad (Especial)</option>
+                            <option value="50">Menor de edad (Especial)</option>
+                            <option value="0">VIP (Cortesía)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Columna 2 -->
+                <div class="contenedor-columnas">
+                    <div class="form-group">
+                        <label>Tel:
+                            <input type="tel" id="telefono" placeholder="Ingrese el número de teléfono">
+                        </label>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Género:</label>
+                        <select id="genero">
+                            <option>Niño</option>
+                            <option>Niña</option>
+                            <option>Mixto</option>
+                            <option>Hombre</option>
+                            <option>Mujer</option>
+                            <option>Otro</option>
+                        </select>
+                    </div>
+
+                    <div class="form-inline">
+                        <label>Cantidad hombres:
+                            <input type="number" id="cantHombres" value="0" min="0" max="1000">
+                        </label>
+                        <label>Cantidad mujeres:
+                            <input type="number" id="cantMujeres" value="0" min="0" max="1000">
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Columna 3 -->
+                <div class="contenedor-columnas">
+                    <div class="form-group">
+                        <label>CP:
+                            <input type="text" id="cp" placeholder="ejem: 12345">
+                        </label>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Es un grupo:</label>
+                        <select id="grupo">
+                            <option>No</option>
+                            <option>Sí</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Cantidad total de visitantes:</label>
+                        <input type="number" id="totalVisitantes" value="1" min="1" disabled>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Total -->
+            <div class="total-section">
+                <div class="total-display">
+                    Total: <span id="totalAmount"
+                        style="background-color: white; border: 1px solid #ccc; padding: 5px 15px; border-radius: 3px;">$100MXN</span>
+                </div>
+            </div>
+
+            <!-- Botones -->
+            <div class="buttons">
+                <button type="button" class="btn-add" id="agregarProductos">Agregar productos</button>
+                <button type="button" class="btn-print" id="imprimir">Imprimir</button>
+                <button type="button" class="btn-cancel" id="cancelar">Cancelar</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Donde se insertará el QR (puede ir abajo del form) -->
+    <div id="qrContainer" style="margin-top:20px; text-align:center;"></div>
+    <!-- Librería QR (implementa ISO/IEC 18004) -->
+    <script src="https://cdn.jsdelivr.net/gh/davidshimjs/qrcodejs/qrcode.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="../JavaScript/PDFTickets.js"></script>
+        <!-- QZ Tray dependencias -->
+    <script src="https://demo.qz.io/js/dependencies/rsvp-3.1.0.min.js"></script>
+    <script src="https://demo.qz.io/js/dependencies/sha-256.min.js"></script>
+    <script src="https://demo.qz.io/js/qz-tray.js"></script>
+</body>
+
+</html>
