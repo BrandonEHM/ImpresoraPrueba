@@ -301,7 +301,7 @@ btnImprimir.addEventListener("click", async function () {
     doc.setFont("helvetica", "normal");
     doc.setFontSize(12);
 
-    //***---*** Cambié alineación: ahora todo va centrado al ancho del ticket
+    //Alineación, todo va centrado al ancho del ticket
     const pageWidth = doc.internal.pageSize.getWidth();
 
     doc.text("Lugar: " + lugar, pageWidth / 2, y, { align: "center" }); y += 8;
@@ -313,12 +313,11 @@ btnImprimir.addEventListener("click", async function () {
     doc.text("Precio: " + totalTexto, pageWidth / 2, y, { align: "center" }); y += 12;
 
     setTimeout(async () => {
-        //***---*** Aquí forzamos a usar el canvas para evitar bordes redondeados
+        //forzar a usar el canvas para evitar bordes redondeados
         let qrCanvas = tempDiv.querySelector("canvas");
         if (qrCanvas) {
             let qrDataUrl = qrCanvas.toDataURL("image/png", 1.0);
-
-            //***---*** QR centrado en el ticket
+            //QR centrado en el ticket
             doc.addImage(qrDataUrl, "PNG", (pageWidth - 60) / 2, y, 60, 60);
             y += 70;
         }
@@ -342,7 +341,7 @@ btnImprimir.addEventListener("click", async function () {
 
 const btnCancelar = document.getElementById("cancelar");
 btnCancelar.addEventListener("click", async function () {
-    //--*--*--*--* este bloque de desconexión QZ Tray lo tienes comentado y no se usa:
+    //Desconexión QZ Tray y alerta
     /*
     if (qz.websocket.isActive()) {
         await qz.websocket.disconnect();
