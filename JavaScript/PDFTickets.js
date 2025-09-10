@@ -238,7 +238,6 @@ cantidadMujeres.addEventListener('change', actualizarPrecioTotal);
 
 actualizarPrecioTotal();
 
-
 //******** Generar QR y PDF ********// 
 const btnImprimir = document.getElementById("imprimir");
 
@@ -251,7 +250,7 @@ const ECC = {
 
 const eccEl = document.getElementById("ecc");
 
-//****** Notificación de impresoras que hay *******/
+//****** (Notificación de impresoras que hay) *******/
 window.addEventListener("load", async () => {
     try {
         await qz.websocket.connect();
@@ -271,6 +270,7 @@ window.addEventListener("load", async () => {
         alert("No se pudieron obtener impresoras. Verifica QZ Tray.");
     }
 });
+//****** ____________________________________________ *******/
 
 btnImprimir.addEventListener("click", async function () {
     const nombre = document.getElementById("nombre").value;
@@ -301,20 +301,26 @@ btnImprimir.addEventListener("click", async function () {
     doc.setFont("helvetica", "normal");
     doc.setFontSize(12);
 
-    doc.text("Lugar: " + lugar, 10, y); y += 8;
-    doc.text("Emitido: " + fechaHora, 10, y); y += 8;
-    let nombreTexto = doc.splitTextToSize("Visitante: " + nombre, 60);
-    doc.text(nombreTexto, 10, y); y += nombreTexto.length * 6;
-    doc.text("Tipo de boleto: " + tipoBoletoTexto, 10, y); y += 8;
-    doc.text("Total visitantes: " + totalVisitantes, 10, y); y += 8;
-    doc.text("Precio: " + totalTexto, 10, y); y += 12;
+    //***---*** Cambié alineación: ahora todo va centrado al ancho del ticket
+    const pageWidth = doc.internal.pageSize.getWidth();
+
+    doc.text("Lugar: " + lugar, pageWidth / 2, y, { align: "center" }); y += 8;
+    doc.text("Emitido: " + fechaHora, pageWidth / 2, y, { align: "center" }); y += 8;
+    let nombreTexto = doc.splitTextToSize("Visitante: " + nombre, 70);
+    doc.text(nombreTexto, pageWidth / 2, y, { align: "center" }); y += nombreTexto.length * 6;
+    doc.text("Tipo de boleto: " + tipoBoletoTexto, pageWidth / 2, y, { align: "center" }); y += 8;
+    doc.text("Total visitantes: " + totalVisitantes, pageWidth / 2, y, { align: "center" }); y += 8;
+    doc.text("Precio: " + totalTexto, pageWidth / 2, y, { align: "center" }); y += 12;
 
     setTimeout(async () => {
-        let qrImg = tempDiv.querySelector("img") || tempDiv.querySelector("canvas");
-        if (qrImg) {
-            let qrDataUrl = qrImg.tagName.toLowerCase() === "img" ? qrImg.src : qrImg.toDataURL("image/png");
-            doc.addImage(qrDataUrl, "PNG", 15, y, 50, 50);
-            y += 60;
+        //***---*** Aquí forzamos a usar el canvas para evitar bordes redondeados
+        let qrCanvas = tempDiv.querySelector("canvas");
+        if (qrCanvas) {
+            let qrDataUrl = qrCanvas.toDataURL("image/png", 1.0);
+
+            //***---*** QR centrado en el ticket
+            doc.addImage(qrDataUrl, "PNG", (pageWidth - 60) / 2, y, 60, 60);
+            y += 70;
         }
 
         const pdfBase64 = btoa(doc.output());
