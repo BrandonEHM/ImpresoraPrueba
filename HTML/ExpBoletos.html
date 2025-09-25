@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Formulario de Boletos</title>
+    <link rel="stylesheet" href="../CSS/ExpBoletos.css">
+    <!link rel="stylesheet" href="../CSS/FormsVisit.css" ¡>
+</head>
+
+<body>
+    <div class="container">
+
+        <div class="row">
+            <div class="flex">
+                <label>Impresora:
+                    <select id="seleccionImpre" required>
+                        <option value="" class="centrado">Cargando impresoras...</option>
+                    </select>
+                </label><br><br>
+            </div>
+
+            <h2 class="centrado">Boletaje</h2>
+
+            <div class="flex"> <!-- Agregar clase flex aquí también -->
+                <label for="ecc" class="centrado">Corrección de errores</label>
+                <select id="ecc">
+                    <option value="L">L (≈7%)</option>
+                    <option value="M" selected>M (≈15%)</option>
+                    <option value="Q">Q (≈25%)</option>
+                    <option value="H">H (≈30%)</option>
+                </select>
+            </div>
+        </div>
+
+        <table>
+            <tr>
+                <th class="centrado">ID</th>
+                <th class="centrado">Tipo de boleto</th>
+                <th class="centrado">Acciones</th>
+            </tr>
+
+            <tr>
+                <td>No. 1</td>
+                <td>Normal (General)</td>
+                <td>
+                    <div class="row">
+
+                        <button type="button" class="buttones" id="eliminarGeneral">-</button>
+                        <div class="cantidad-section-boletos">
+                            <div class="cantidad-display-boletos">
+
+                                <span id="totalGeneral" value="80"
+                                    style="background-color: white; border: 1px solid #ccc; padding: 5px 15px; border-radius: 3px;">0
+                                </span>
+
+                            </div>
+                        </div>
+                        <button type="button" class="buttones" id="agregarGeneral">+</button>
+
+                    </div>
+                </td>
+            </tr>
+
+
+
+            <tr>
+                <td>No. 2</td>
+                <td>Estudiante (Especial)</td>
+                <td>
+
+                    <div class="row">
+
+                        <button type="button" class="buttones" id="eliminarEstudiante">-</button>
+                        <div class="cantidad-section-boletos">
+                            <div class="cantidad-display-boletos">
+
+                                <span id="totalEstudiante"
+                                    style="background-color: white; border: 1px solid #ccc; padding: 5px 15px; border-radius: 3px;">0
+                                </span>
+
+                            </div>
+                        </div>
+                        <button type="button" class="buttones" id="agregarEstudiante">+</button>
+
+                    </div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td>No. 3</td>
+                <td>3ra edad (Especial)</td>
+                <td>
+
+                    <div class="row">
+
+                        <button type="button" class="buttones" id="eliminar3ra">-</button>
+                        <div class="cantidad-section-boletos">
+                            <div class="cantidad-display-boletos">
+
+                                <span id="total3ra"
+                                    style="background-color: white; border: 1px solid #ccc; padding: 5px 15px; border-radius: 3px;">0
+                                </span>
+
+                            </div>
+                        </div>
+                        <button type="button" class="buttones" id="agregar3ra">+</button>
+
+                    </div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td>No. 4</td>
+                <td>Menor de edad (Especial)</td>
+                <td>
+
+                    <div class="row">
+
+                        <button type="button" class="buttones" id="eliminarMenor">-</button>
+                        <div class="cantidad-section-boletos">
+                            <div class="cantidad-display-boletos">
+
+                                <span id="totalMenor"
+                                    style="background-color: white; border: 1px solid #ccc; padding: 5px 15px; border-radius: 3px;">0
+                                </span>
+
+                            </div>
+                        </div>
+                        <button type="button" class="buttones" id="agregarMenor">+</button>
+
+                    </div>
+
+                </td>
+            </tr>
+
+
+            <tr>
+                <td>No. 5</td>
+                <td>VIP (Cortesía)</td>
+                <td>
+
+                    <div class="row">
+
+                        <button type="button" class="buttones" id="eliminarVip">-</button>
+                        <div class="cantidad-section-boletos">
+                            <div class="cantidad-display-boletos">
+
+                                <span id="totalVip"
+                                    style="background-color: white; border: 1px solid #ccc; padding: 5px 15px; border-radius: 3px;">0
+                                </span>
+
+                            </div>
+                        </div>
+                        <button type="button" class="buttones" id="agregarVip">+</button>
+
+                    </div>
+
+                </td>
+            </tr>
+
+        </table>
+
+        <div class="container-column">
+            <!-- Total -->
+            <div class="total-section">
+                <div class="total-display">
+                    Total Boletos: <span id="totalBoletos"
+                        style="background-color: white; border: 1px solid #ccc; padding: 5px 15px; border-radius: 3px;">0</span>
+                </div>
+            </div>
+
+            <!-- Total -->
+            <div class="total-section">
+                <div class="total-display">
+                    Total: <span id="totalAmount"
+                        style="background-color: white; border: 1px solid #ccc; padding: 5px 15px; border-radius: 3px;">$0MXN</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="buttons">
+            <button type="button" class="btn-agregar" id="agregarProductos">Agregar productos</button>
+            <button type="button" class="btn-imprimir" id="imprimirBoleto">Imprimir</button>
+            <button type="button" class="btn-cancelar" id="cancelarBoleto">Cancelar</button>
+        </div>
+    </div>
+
+
+
+    <!-- Donde se insertará el QR (puede ir abajo del form) -->
+    <div id="qrContainer" style="margin-top:20px; text-align:center;"></div>
+    <!-- Librería QR (implementa ISO/IEC 18004) -->
+    <script src="https://cdn.jsdelivr.net/gh/davidshimjs/qrcodejs/qrcode.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <!-- QZ Tray dependencias -->
+    <script src="https://demo.qz.io/js/dependencies/rsvp-3.1.0.min.js"></script>
+    <script src="https://demo.qz.io/js/dependencies/sha-256.min.js"></script>
+    <script src="https://demo.qz.io/js/qz-tray.js"></script>
+    <!-- Scripts personalizados -->
+    <script src="../JavaScript/DataVisit.js"></script>
+    <!-- QZ Tray dependencias -->
+    <script src="https://demo.qz.io/js/dependencies/rsvp-3.1.0.min.js"></script>
+    <script src="https://demo.qz.io/js/dependencies/sha-256.min.js"></script>
+    <script src="https://demo.qz.io/js/qz-tray.js"></script>
+
+
+</body>
+
+</html>

@@ -1,3 +1,4 @@
+//PDFTickets.js
 //**Validar datos del visitante************* */
 
 const nombreInput = document.getElementById('nombre');
@@ -13,7 +14,7 @@ nombreInput.addEventListener('keypress', function (e) {
 
     // Permitir solo letras, espacios y caracteres especiales del español
     if (!/[A-Za-záéíóúÁÉÍÓÚñÑ\s]/.test(char)) {
-        e.preventDefault(); //--*--*--*--* sobra la "s" que estaba aquí en tu código
+        e.preventDefault();
         return false;
     }
 });
@@ -148,15 +149,7 @@ if (form) {
         const cantMujeres = parseInt(document.getElementById('cantMujeres').value) || 0;
         const totalVisitantes = parseInt(document.getElementById('totalVisitantes').value);
 
-        //--*--*--*--* ESTA VALIDACIÓN NO SIRVE: "visitantes" nunca se definió
-        /*
-        if (!visitantes || visitantes <= 0 || visitantes > 1000) {
-            alert('Por favor, ingrese un número válido de visitantes (mayor a 0 y menor a 1000)');
-            document.getElementById('visitantes').focus();
-            return;
-        }
-        */
-
+  
         if (cp && cp.length !== 5) {
             alert('El código postal debe tener exactamente 5 dígitos');
             document.getElementById('cp').focus();
@@ -191,6 +184,13 @@ function actualizarCantidadTotal() {
     const mujeres = parseInt(cantidadMujeres.value) || 0;
     const totalVisitantes = hombres + mujeres;
     cantidadTotal.value = totalVisitantes > 0 ? totalVisitantes : 1;
+
+// Guardar en localStorage como JSON--------------
+    const data = {
+        totalVisitantes: cantidadTotal.value,
+        nombre: nombreInput.value // se guarda el nombre si lo ocupas después
+    };
+    localStorage.setItem("visitData", JSON.stringify(data));//---------------
 }
 
 function toggleCampos() {
@@ -218,28 +218,35 @@ document.addEventListener('DOMContentLoaded', function () {
     actualizarCantidadTotal();
 });
 
+//Cambiar a pagina de boletos**************
+const btnContinuar = document.getElementById("continuar");
+btnContinuar.addEventListener("click", async function () {
+window.location.href = "../HTML/ExpBoletos.html"; // Cambia por tu ruta
+});
 
-//******PRECIO-BOLETO *********/
-const tipoBoleto = document.getElementById('Tipo_boleto');
-const totalAmountElement = document.getElementById('totalAmount');
 
-function actualizarPrecioTotal() {
-    const valorPrecio = parseInt(tipoBoleto.value) || 0;
-    const totalVisitantes = parseInt(cantidadTotal.value) || 1;
-    const precioTotal = valorPrecio * totalVisitantes;
-    totalAmountElement.textContent = `$${precioTotal}MXN`;
-}
 
-tipoBoleto.addEventListener('change', actualizarPrecioTotal);
-cantidadHombres.addEventListener('input', actualizarPrecioTotal);
-cantidadMujeres.addEventListener('input', actualizarPrecioTotal);
-cantidadHombres.addEventListener('change', actualizarPrecioTotal);
-cantidadMujeres.addEventListener('change', actualizarPrecioTotal);
+const btnCancelar = document.getElementById("cancelarforms");
+btnCancelar.addEventListener("click", async function () {
+    //Desconexión QZ Tray y alerta
+    /*
+    if (qz.websocket.isActive()) {
+        await qz.websocket.disconnect();
+    }
+    alert("Conexión con QZ Tray cerrada.");
+    location.reload();
+    */
 
-actualizarPrecioTotal();
+    document.getElementById("FormTicket").reset();
+    toggleCampos();
+    actualizarCantidadTotal();
+});
 
-//******** Generar QR y PDF ********// 
-const btnImprimir = document.getElementById("imprimir");
+
+/*
+
+//-******* Generar QR y PDF *******-// 
+const btnImprimir = document.getElementById("continuar");
 
 const ECC = {
     L: QRCode.CorrectLevel.L,
@@ -250,7 +257,7 @@ const ECC = {
 
 const eccEl = document.getElementById("ecc");
 
-//****** (Notificación de impresoras que hay) *******/
+//-***** (Notificación de impresoras que hay) ******-/
 window.addEventListener("load", async () => {
     try {
         await qz.websocket.connect();
@@ -272,6 +279,8 @@ window.addEventListener("load", async () => {
 });
 //****** ____________________________________________ *******/
 
+
+/*
 btnImprimir.addEventListener("click", async function () {
     const nombre = document.getElementById("nombre").value;
     const tipoBoletoEl = document.getElementById("Tipo_boleto");
@@ -339,19 +348,5 @@ btnImprimir.addEventListener("click", async function () {
     }, 500);
 });
 
-const btnCancelar = document.getElementById("cancelar");
-btnCancelar.addEventListener("click", async function () {
-    //Desconexión QZ Tray y alerta
-    /*
-    if (qz.websocket.isActive()) {
-        await qz.websocket.disconnect();
-    }
-    alert("Conexión con QZ Tray cerrada.");
-    location.reload();
-    */
+*/ 
 
-    document.getElementById("FormTicket").reset();
-    actualizarPrecioTotal();
-    toggleCampos();
-    actualizarCantidadTotal();
-});

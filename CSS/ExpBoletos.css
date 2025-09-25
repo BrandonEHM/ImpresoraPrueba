@@ -1,0 +1,157 @@
+.centrado {
+  text-align: center;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 20px;
+  background-color: #818181de;
+}
+
+.container {
+  background-color: #F5EBE0;
+  padding: 20px;
+  border-radius: 10px;
+  max-width: 900px;
+  margin: 0 auto;
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.centrado-intro {
+  text-align: center;
+  margin: 0;
+  flex: 1;
+
+}
+
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.2px;
+  margin-bottom: 0.1px;
+}
+
+.flex {
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+}
+
+.flex label {
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+
+
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td,
+th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+
+
+.buttones {
+  width: 100%;
+  padding: 2px 1px;
+  /* opcional: agrandar el botón */
+  margin-top: 1px;
+  border: 2px solid #ccc;
+  border-radius: 50px;
+  font-size: 20px;
+  cursor: pointer;
+  /* opcional: cambia el cursor al pasar encima */
+
+}
+
+
+input,
+select,
+button {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+
+/* botones */
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+button {
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.btn-agregar {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.btn-imprimir {
+  background-color: #2196F3;
+  color: white;
+}
+
+.btn-cancelar {
+  background-color: #f44336;
+  color: white;
+}
+
+/*Sección cantidad*/
+.cantidad-section-boletos {
+  padding: 10px;
+  border-radius: 5px;
+  margin: 20px 0;
+}
+
+.cantidad-display-boletos {
+  font-size: 18px;
+  font-weight: bold;
+  text-align: right;
+}
+
+
+/*Sección total */
+.total-section {
+  padding: 15px;
+  border-radius: 5px;
+  margin: 20px 0;
+}
+
+.total-display {
+  font-size: 18px;
+  font-weight: bold;
+  text-align: right;
+}
+
+.container-column {
+
+  display: grid;
+  column-gap: 50px;
+  background-color: #F5EBE0;
+  border-radius: 10px;
+  max-width: 900px;
+  margin: 0 auto;
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.2);
+}

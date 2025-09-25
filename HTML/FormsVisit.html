@@ -11,25 +11,11 @@
 <body>
     <div class="container">
         <div class="row">
-            <div class="flex">
-                <label>Impresora:
-                    <select id="seleccionImpre" required>
-                        <option value="" class="centrado">Cargando impresoras...</option>
-                    </select>
-                </label><br><br>
-            </div>
+
 
             <h2 class="centrado">Formulario para Ticket</h2>
 
-            <div class="flex"> <!-- Agregar clase flex aquí también -->
-                <label for="ecc" class="centrado">Corrección de errores</label>
-                <select id="ecc">
-                    <option value="L">L (≈7%)</option>
-                    <option value="M" selected>M (≈15%)</option>
-                    <option value="Q">Q (≈25%)</option>
-                    <option value="H">H (≈30%)</option>
-                </select>
-            </div>
+
         </div>
         <form id="FormTicket">
 
@@ -54,16 +40,7 @@
                         </select>
                     </div>
 
-                    <div class="form-group">
-                        <label>Tipo de boleto:</label>
-                        <select id="Tipo_boleto">
-                            <option value="100">Normal (General)</option>
-                            <option value="80">Estudiante (Especial)</option>
-                            <option value="70">3ra edad (Especial)</option>
-                            <option value="50">Menor de edad (Especial)</option>
-                            <option value="0">VIP (Cortesía)</option>
-                        </select>
-                    </div>
+
                 </div>
 
                 <!-- Columna 2 -->
@@ -119,19 +96,11 @@
                 </div>
             </div>
 
-            <!-- Total -->
-            <div class="total-section">
-                <div class="total-display">
-                    Total: <span id="totalAmount"
-                        style="background-color: white; border: 1px solid #ccc; padding: 5px 15px; border-radius: 3px;">$100MXN</span>
-                </div>
-            </div>
-
             <!-- Botones -->
             <div class="buttons">
                 <button type="button" class="btn-agregar" id="agregarProductos">Agregar productos</button>
-                <button type="button" class="btn-imprimir" id="imprimir">Imprimir</button>
-                <button type="button" class="btn-cancelar" id="cancelar">Cancelar</button>
+                <button type="button" class="btn-imprimir" id="continuar">Continuar</button>
+                <button type="button" class="btn-cancelar" id="cancelarforms">Cancelar</button>
             </div>
         </form>
     </div>
@@ -141,11 +110,15 @@
     <!-- Librería QR (implementa ISO/IEC 18004) -->
     <script src="https://cdn.jsdelivr.net/gh/davidshimjs/qrcodejs/qrcode.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <!-- Scripts personalizados -->
     <script src="../JavaScript/PDFTickets.js"></script>
     <!-- QZ Tray dependencias -->
     <script src="https://demo.qz.io/js/dependencies/rsvp-3.1.0.min.js"></script>
     <script src="https://demo.qz.io/js/dependencies/sha-256.min.js"></script>
     <script src="https://demo.qz.io/js/qz-tray.js"></script>
+
+
+
 </body>
 
 </html>
