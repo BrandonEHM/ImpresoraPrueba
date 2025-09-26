@@ -176,11 +176,34 @@ window.addEventListener("load", async () => {
     }
 });
 
+
+
+
 btnImprimir.addEventListener("click", async function () {
+
     // Obtener datos del localStorage (enviados desde PDFTickets.js)
     const visitData = JSON.parse(localStorage.getItem("visitData")) || {};
     const nombre = visitData.nombre || "Sin nombre";
     const totalVisitantes = visitData.totalVisitantes || "0";
+
+    // calcula el total de boletos seleccionados
+    let totalBoletos = 0;
+    const filas = document.querySelectorAll("table tr");
+    for (let i = 1; i < filas.length; i++) {
+        const fila = filas[i];
+        const span = fila.querySelector("span");
+        const cantidad = parseInt(span.innerText) || 0;
+        totalBoletos += cantidad; // Suma todas las cantidades de boletos
+    }
+    // Validar que el total de boletos coincida con totalVisitantes 
+    // si no es así no se genera el ticket QR
+    if (totalVisitantes > 0 && totalBoletos >= totalVisitantes) {
+        // Continúa con el proceso de impresión
+        console.log("Validación exitosa - proceder con la impresión");
+    } else {
+        alert("Debe seleccionar la cantidad correcta de boletos antes de imprimir.");
+        return; 
+    }
 
     // Obtener información de los boletos y precio total
     const totalTexto = document.getElementById("totalAmount").innerText;
@@ -196,7 +219,6 @@ btnImprimir.addEventListener("click", async function () {
 
     // Obtener detalles de los boletos seleccionados
     let boletosSeleccionados = [];
-    const filas = document.querySelectorAll("table tr");
     for (let i = 1; i < filas.length; i++) {
         const fila = filas[i];
         const tipoBoleto = fila.querySelector("td:nth-child(2)").textContent.trim();
@@ -207,13 +229,13 @@ btnImprimir.addEventListener("click", async function () {
             // Asegurar que el precio sea válido, incluso si es 0 (VIP)
             const precioPorBoleto = preciosBoletos.hasOwnProperty(tipoBoleto) ? preciosBoletos[tipoBoleto] : 0;
             const totalPrecio = cantidad * precioPorBoleto;
-                   // --*--SOLUCIÓN 1: Abreviar nombres de boletos para reducir longitud
+            // --*--SOLUCIÓN 1: Abreviar nombres de boletos para reducir longitud
             let tipoAbreviado = tipoBoleto
                 .replace("Menor de edad (Especial)", "Menor")
                 .replace("VIP (Cortesía)", "VIP")
                 .replace("Adulto mayor", "AM")
                 .replace("Estudiante", "Est");
-                
+
             boletosSeleccionados.push(`${tipoAbreviado}: ${cantidad}x${precioPorBoleto}MXN`);
         }
     }
@@ -231,7 +253,7 @@ btnImprimir.addEventListener("click", async function () {
     console.log("QR Text:", qrText); // Para debug - puedes quitar esta línea después
     console.log("QR Text Length:", qrText.length); // Para verificar longitud
 
-//---**-- SOLUCIÓN 3: Usar nivel de corrección más bajo y version más alta para mayor capacidad
+    //---**-- SOLUCIÓN 3: Se agrego la version más alta para mayor capacidad
     const tempDiv = document.createElement("div");
     const ecc = ECC[eccEl.value] || QRCode.CorrectLevel.M;
 
@@ -244,10 +266,10 @@ btnImprimir.addEventListener("click", async function () {
             version: 15 // Mayor version para más capacidad (hasta 40)
         });
     } catch (error) {
-        // SOLUCIÓN 4: Si aún falla, crear texto aún más corto
+        //---**--  SOLUCIÓN 4: Crear texto aún más corto
         console.warn("QR muy largo, usando versión ultra compacta");
         const qrTextCorto = `${totalVisitantes}:${boletosSeleccionados.length}boletos`;
-        
+
         new QRCode(tempDiv, {
             text: qrTextCorto,
             width: 150,
