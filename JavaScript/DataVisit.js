@@ -280,7 +280,9 @@ btnImprimir.addEventListener("click", async function () {
     }
 
     const { jsPDF } = window.jspdf;
-    const doc = new jsPDF({ orientation: "portrait", unit: "mm", format: [80, 200] });
+    //const doc = new jsPDF({ orientation: "portrait", unit: "mm", format: [80, 200] });
+    const doc = new jsPDF({ orientation: "portrait", unit: "mm", format: "letter" });
+
 
     let y = 10;
     doc.setFont("helvetica", "normal");
