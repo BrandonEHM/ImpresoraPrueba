@@ -193,7 +193,7 @@ btnImprimir.addEventListener("click", async function () {
         const fila = filas[i];
         const span = fila.querySelector("span");
         const cantidad = parseInt(span.innerText) || 0;
-        totalBoletos += cantidad; // Suma todas las cantidades de boletos
+        totalBoletos += cantidad;
     }
     // Validar que el total de boletos coincida con totalVisitantes 
     // si no es así no se genera el ticket QR
@@ -202,7 +202,7 @@ btnImprimir.addEventListener("click", async function () {
         console.log("Validación exitosa - proceder con la impresión");
     } else {
         alert("Debe seleccionar la cantidad correcta de boletos antes de imprimir.");
-        return; 
+        return;
     }
 
     // Obtener información de los boletos y precio total
@@ -280,24 +280,33 @@ btnImprimir.addEventListener("click", async function () {
     }
 
     const { jsPDF } = window.jspdf;
-    //const doc = new jsPDF({ orientation: "portrait", unit: "mm", format: [80, 200] });
-    const doc = new jsPDF({ orientation: "portrait", unit: "mm", format: "letter" });
+    const doc = new jsPDF({
+        orientation: "portrait",
+        unit: "mm",
+        format: [80, 200]
+    });
+    //const doc = new jsPDF({ orientation: "portrait", unit: "mm", format: "letter" });
 
 
     let y = 10;
     doc.setFont("helvetica", "normal");
-    doc.setFontSize(12);
-
+    doc.setFontSize(10);
     //Alineación, todo va centrado al ancho del ticket
     const pageWidth = doc.internal.pageSize.getWidth();
 
-    // Información del ticket (solo lo que solicitaste)
-    doc.text(lugar, pageWidth / 2, y, { align: "center" }); y += 8;
-    doc.text("Emitido: " + fechaHora, pageWidth / 2, y, { align: "center" }); y += 8;
+    // Información del ticket 
+    doc.text(lugar, pageWidth / 2, y, { align: "center" }); y += 6;
+
+    doc.setFontSize(8); // Tamaño de texto reducido para fecha
+    doc.text("Emitido: " + fechaHora, pageWidth / 2, y, { align: "center" }); y += 6;
+
+    doc.setFontSize(9); // Tamaño de texto aumentado
     let nombreTexto = doc.splitTextToSize("Bienvenido: " + nombre, 70);
-    doc.text(nombreTexto, pageWidth / 2, y, { align: "center" }); y += nombreTexto.length * 6;
-    doc.text("Total visitantes: " + totalVisitantes, pageWidth / 2, y, { align: "center" }); y += 8;
-    doc.text("Precio total: " + totalTexto, pageWidth / 2, y, { align: "center" }); y += 12;
+    doc.text(nombreTexto, pageWidth / 2, y, { align: "center" }); y += nombreTexto.length * 5;
+
+    doc.setFontSize(10); // Tamaño de texto aumentado
+    doc.text("Total visitantes: " + totalVisitantes, pageWidth / 2, y, { align: "center" }); y += 6;
+    doc.text("Precio total: " + totalTexto, pageWidth / 2, y, { align: "center" }); y += 10;
 
     setTimeout(async () => {
         //forzar a usar el canvas para evitar bordes redondeados
@@ -305,7 +314,9 @@ btnImprimir.addEventListener("click", async function () {
         if (qrCanvas) {
             let qrDataUrl = qrCanvas.toDataURL("image/png", 1.0);
             //QR centrado en el ticket
-            doc.addImage(qrDataUrl, "PNG", (pageWidth - 60) / 2, y, 60, 60);
+            // Usar 60mm de ancho para el QR
+            const qrSize = 50;
+            doc.addImage(qrDataUrl, "PNG", (pageWidth - qrSize) / 2, y, qrSize, qrSize);
             y += 70;
         }
 
