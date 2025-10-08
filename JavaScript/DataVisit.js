@@ -290,7 +290,7 @@ btnImprimir.addEventListener("click", async function () {
     const offset = 0; // -4 Margen adicional
     let y = 10;
     doc.setFont("helvetica", "normal");
-    doc.setFontSize(10);
+    doc.setFontSize(20);
     //Alineación, todo va centrado al ancho del ticket
     const pageWidth = doc.internal.pageSize.getWidth();
     // 88-- const margenIzquierdo = 3; 
@@ -298,14 +298,14 @@ btnImprimir.addEventListener("click", async function () {
     // Información del ticket 
     doc.text(lugar, pageWidth / 2 + offset, y, { align: "center" }); y += 6;
 
-    doc.setFontSize(8); // Tamaño de texto reducido para fecha
+    doc.setFontSize(18); // Tamaño de texto reducido para fecha
     doc.text("Emitido: " + fechaHora, pageWidth / 2 + offset, y, { align: "center" }); y += 6;
 
-    doc.setFontSize(9); // Tamaño de texto aumentado
+    doc.setFontSize(19); // Tamaño de texto aumentado
     let nombreTexto = doc.splitTextToSize("Bienvenido: " + nombre, 70);
     doc.text(nombreTexto, pageWidth / 2 + offset, y, { align: "center" }); y += nombreTexto.length * 5;
 
-    doc.setFontSize(10); // Tamaño de texto aumentado
+    doc.setFontSize(20); // Tamaño de texto aumentado
     doc.text("Total visitantes: " + totalVisitantes, pageWidth / 2 + offset, y, { align: "center" }); y += 6;
     doc.text("Precio total: " + totalTexto, pageWidth / 2 + offset, y, { align: "center" }); y += 10;
 
