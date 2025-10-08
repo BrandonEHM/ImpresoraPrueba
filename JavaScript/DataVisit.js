@@ -356,7 +356,7 @@ btnImprimir.addEventListener("click", async function () {
         window.open(doc.output("bloburl"), "_blank");
     }, 500);
 });
-
+//Por si acaso
 //termina la generación de PDF y QR*-*-*-*
 
 //Empireza la generación de PDF y QR*-*-*-*
