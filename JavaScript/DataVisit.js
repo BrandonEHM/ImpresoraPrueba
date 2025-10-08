@@ -272,10 +272,10 @@ btnImprimir.addEventListener("click", async function () {
 
         new QRCode(tempDiv, {
             text: qrTextCorto,
-            width: 150,
-            height: 150,
+            width: 180,
+            height: 180,
             correctLevel: ecc,
-            version: 10
+            version: 15
         });
     }
 
@@ -316,7 +316,7 @@ btnImprimir.addEventListener("click", async function () {
             let qrDataUrl = qrCanvas.toDataURL("image/png", 1.0);
             //QR centrado en el ticket
             // Usar 60mm de ancho para el QR
-            const qrSize = 50;
+            const qrSize = 55;
             doc.addImage(qrDataUrl, "PNG", (pageWidth - qrSize) / 2, y, qrSize, qrSize);
             y += 70;
         }
