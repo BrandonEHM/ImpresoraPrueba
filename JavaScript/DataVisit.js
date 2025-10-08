@@ -283,31 +283,30 @@ btnImprimir.addEventListener("click", async function () {
     const doc = new jsPDF({
         orientation: "portrait",
         unit: "mm",
-        format: [72, 200]
+        format: [80, 200]
     });
     //const doc = new jsPDF({ orientation: "portrait", unit: "mm", format: "letter" });
 
-    const offset = 0; // -4 Margen adicional
+
     let y = 10;
     doc.setFont("helvetica", "normal");
     doc.setFontSize(10);
     //Alineación, todo va centrado al ancho del ticket
     const pageWidth = doc.internal.pageSize.getWidth();
-    // 88-- const margenIzquierdo = 3; 
 
     // Información del ticket 
-    doc.text(lugar, pageWidth / 2 + offset, y, { align: "center" }); y += 6;
+    doc.text(lugar, pageWidth / 2, y, { align: "center" }); y += 6;
 
     doc.setFontSize(8); // Tamaño de texto reducido para fecha
-    doc.text("Emitido: " + fechaHora, pageWidth / 2 + offset, y, { align: "center" }); y += 6;
+    doc.text("Emitido: " + fechaHora, pageWidth / 2, y, { align: "center" }); y += 6;
 
     doc.setFontSize(9); // Tamaño de texto aumentado
     let nombreTexto = doc.splitTextToSize("Bienvenido: " + nombre, 70);
-    doc.text(nombreTexto, pageWidth / 2 + offset, y, { align: "center" }); y += nombreTexto.length * 5;
+    doc.text(nombreTexto, pageWidth / 2, y, { align: "center" }); y += nombreTexto.length * 5;
 
     doc.setFontSize(10); // Tamaño de texto aumentado
-    doc.text("Total visitantes: " + totalVisitantes, pageWidth / 2 + offset, y, { align: "center" }); y += 6;
-    doc.text("Precio total: " + totalTexto, pageWidth / 2 + offset, y, { align: "center" }); y += 10;
+    doc.text("Total visitantes: " + totalVisitantes, pageWidth / 2, y, { align: "center" }); y += 6;
+    doc.text("Precio total: " + totalTexto, pageWidth / 2, y, { align: "center" }); y += 10;
 
     setTimeout(async () => {
         //forzar a usar el canvas para evitar bordes redondeados
@@ -321,30 +320,11 @@ btnImprimir.addEventListener("click", async function () {
             y += 70;
         }
 
-        //-*-*** const pdfBase64 = btoa(doc.output()); //devuelve texto (no datos binarios puros), 
-        // y al convertirlo con btoa() se pierde el formato binario original del PDF.
-        const pdfBase64 = doc.output("datauristring").split(",")[1]; // Extrae solo la parte base64
-        //genera directamente el Base64 
-        // correcto del PDF, sin dañar el  
-        // contenido ni el formato del ticket.
+        const pdfBase64 = btoa(doc.output());
 
         try {
-            const config = qz.configs.create(printer, {
-                margins: { top: 0, right: 0, bottom: 0, left: 0 },
-                size: { width: 72, height: 200 },
-                units: 'mm',
-                scaleContent: false,
-                rasterize: false,
-                orientation: 'portrait'
-            });
-
-            const data = [{
-                type: 'pdf',
-                format: 'base64',
-                data: pdfBase64,
-                options: { margins: 0 }
-            }];
-
+            const config = qz.configs.create(printer);
+            const data = [{ type: 'pdf', format: 'base64', data: pdfBase64 }];
             await qz.print(config, data);
             alert("Ticket enviado a la impresora: " + printer);
         } catch (err) {
