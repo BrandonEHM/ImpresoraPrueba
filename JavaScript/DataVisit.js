@@ -290,24 +290,24 @@ btnImprimir.addEventListener("click", async function () {
     const offset = 0; // -4 Margen adicional
     let y = 10;
     doc.setFont("helvetica", "normal");
-    doc.setFontSize(20);
+    doc.setFontSize(15);
     //Alineación, todo va centrado al ancho del ticket
     const pageWidth = doc.internal.pageSize.getWidth();
     // 88-- const margenIzquierdo = 3; 
 
     // Información del ticket 
-    doc.text(lugar, pageWidth / 2 + offset, y, { align: "center" }); y += 6;
+    doc.text(lugar, pageWidth / 2 + offset, y, { align: "center" }); y += 8;
 
-    doc.setFontSize(18); // Tamaño de texto reducido para fecha
-    doc.text("Emitido: " + fechaHora, pageWidth / 2 + offset, y, { align: "center" }); y += 6;
+    doc.setFontSize(13); // Tamaño de texto reducido para fecha
+    doc.text("Emitido: " + fechaHora, pageWidth / 2 + offset, y, { align: "center" }); y += 8;
 
-    doc.setFontSize(19); // Tamaño de texto aumentado
+    doc.setFontSize(14); // Tamaño de texto aumentado
     let nombreTexto = doc.splitTextToSize("Bienvenido: " + nombre, 70);
-    doc.text(nombreTexto, pageWidth / 2 + offset, y, { align: "center" }); y += nombreTexto.length * 5;
+    doc.text(nombreTexto, pageWidth / 2 + offset, y, { align: "center" }); y += nombreTexto.length * 7;
 
-    doc.setFontSize(20); // Tamaño de texto aumentado
-    doc.text("Total visitantes: " + totalVisitantes, pageWidth / 2 + offset, y, { align: "center" }); y += 6;
-    doc.text("Precio total: " + totalTexto, pageWidth / 2 + offset, y, { align: "center" }); y += 10;
+    doc.setFontSize(15); // Tamaño de texto aumentado
+    doc.text("Total visitantes: " + totalVisitantes, pageWidth / 2 + offset, y, { align: "center" }); y += 8;
+    doc.text("Precio total: " + totalTexto, pageWidth / 2 + offset, y, { align: "center" }); y += 12;
 
     setTimeout(async () => {
         //forzar a usar el canvas para evitar bordes redondeados
