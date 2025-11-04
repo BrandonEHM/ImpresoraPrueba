@@ -14,6 +14,9 @@ export class Sidebar {
   navegarEditarCrearProducto() {
     this.router.navigate(['/interfaz-editar-productos']);
   }
+  navegarPaginacion() {
+    this.router.navigate(['/paginacion']);
+  }
 }
 
 
