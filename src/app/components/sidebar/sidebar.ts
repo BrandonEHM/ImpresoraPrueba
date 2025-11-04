@@ -1,10 +1,10 @@
 import { Component, ChangeDetectionStrategy, afterNextRender} from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
 import { initFlowbite } from 'flowbite';
 
 @Component({
   selector: 'app-sidebar',
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, RouterLink, RouterLinkActive],
   templateUrl: './sidebar.html',
   styleUrl: './sidebar.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
