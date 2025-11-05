@@ -1,13 +1,19 @@
-import { Component, signal } from '@angular/core';
+import { Component, signal, afterNextRender } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { Login } from './components/login/login';
+import { initFlowbite } from 'flowbite';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, Login],
+  imports: [RouterOutlet],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
 export class App {
   protected readonly title = signal('izc-pos-frontend');
+
+  constructor() {
+    afterNextRender(() => {
+      initFlowbite();
+    });
+  }
 }
