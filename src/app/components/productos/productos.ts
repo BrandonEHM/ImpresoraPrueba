@@ -1,8 +1,9 @@
-import { Component, ChangeDetectionStrategy, afterNextRender, signal, computed } from '@angular/core';
+import { Component, ChangeDetectionStrategy, afterNextRender, signal, computed, viewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { initFlowbite } from 'flowbite';
-
+import { ModalAgregarProducto } from '../modal-agregar-producto/modal-agregar-producto';
+import { Paginacion } from '../paginacion/paginacion';
 interface Producto {
   id: number;
   nombre: string;
@@ -13,12 +14,15 @@ interface Producto {
 @Component({
   selector: 'app-productos',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, ModalAgregarProducto, Paginacion],
   templateUrl: './productos.html',
   styleUrls: ['./productos.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Productos {
+  // ViewChild para acceder al modal
+  modalAgregar = viewChild<ModalAgregarProducto>('modalAgregar');
+
   constructor() {
     afterNextRender(() => {
       initFlowbite();
@@ -31,13 +35,13 @@ export class Productos {
     { id: 3, nombre: 'Collar', precio: 150, descuento: 0 },
   ]);
 
-  //Singnal para el manejar busquedas
+  // Signal para el manejar busquedas
   Busqueda = signal<string>('');
-  //Computed para filtrar productos segun la busqueda
+  
+  // Computed para filtrar productos segun la busqueda
   productosFiltrados = computed(() => {
     const termino = this.Busqueda().toLowerCase().trim();
-    if (!termino) return this.productos(); // Si no hay busqueda debera mostrar todo
-    // Filtrar productos que coincidan con el termino de busqueda
+    if (!termino) return this.productos();
     return this.productos().filter(producto =>
       producto.id.toString().includes(termino) ||
       producto.nombre.toLowerCase().includes(termino) ||
@@ -46,43 +50,36 @@ export class Productos {
     );
   });
 
-  nuevoProducto = signal<Producto>({ id: 0, nombre: '', precio: 0, descuento: 0 });
   productoEditado = signal<Producto>({ id: 0, nombre: '', precio: 0, descuento: 0 });
   productoAEliminar = signal<Producto | null>(null);
 
-
-  //Metodo para actualizar el término de búsqueda
+  // Metodo para actualizar el término de búsqueda
   actualizarBusqueda(event: Event) {
     const input = event.target as HTMLInputElement;
     this.Busqueda.set(input.value);
   }
 
-  //Encontrar el ID mas alto para asignar uno nuevo
+  // Encontrar el ID mas alto para asignar uno nuevo
   obtenerSiguienteId(): number {
     const productos = this.productos();
     return productos.length > 0 ? Math.max(...productos.map(p => p.id)) + 1 : 1;
   }
 
+  // Método para abrir el modal de agregar
+  abrirModalAgregar() {
+    this.modalAgregar()?.abrir();
+  }
 
-  // Funcion para Agregar Producto
-  agregarProducto(event: Event) {
-    event.preventDefault();
-    const nuevo = this.nuevoProducto();
-
-    if (!nuevo.nombre || nuevo.precio <= 0) {
-      alert('Por favor completa todos los campos');
-      return;
-    }
-    // Asignar un ID unico al nuevo producto usando la funcion obtenerSiguienteId
-    const productoConId = { ...nuevo, id: this.obtenerSiguienteId() };
+  // Método llamado cuando se agrega un producto desde el modal
+  onProductoAgregado(producto: Producto) {
+    const productoConId = { ...producto, id: this.obtenerSiguienteId() };
     this.productos.update(arr => [...arr, productoConId]);
-    this.nuevoProducto.set({ id: 0, nombre: '', precio: 0, descuento: 0 });
-    this.cerrarModalConClick('crud-modal');
   }
 
   seleccionarParaEditar(producto: Producto) {
     this.productoEditado.set({ ...producto });
   }
+
   // Funcion para Editar Producto
   guardarCambios(event: Event) {
     event.preventDefault();
@@ -103,6 +100,7 @@ export class Productos {
   seleccionarParaEliminar(producto: Producto) {
     this.productoAEliminar.set(producto);
   }
+
   // Funcion para Eliminar Producto
   eliminarProducto() {
     const producto = this.productoAEliminar();
@@ -111,33 +109,28 @@ export class Productos {
     this.productos.set(this.productos().filter(p => p.id !== producto.id));
     this.cerrarModalConClick('delete-modal');
   }
-  // ------------------------------------------------------------------------------
-  // === NUEVA FUNCIÓN: SIMULA CLICK EN EL BOTÓN DE CERRAR ===
+
   cerrarModalConClick(id: string) {
     const modal = document.getElementById(id);
     if (!modal) return;
 
-    // Buscar el botón de cerrar dentro del modal
     const closeButton = modal.querySelector('[data-modal-hide="' + id + '"]') ||
       modal.querySelector('[data-modal-toggle="' + id + '"]');
 
     if (closeButton) {
-      // Simular click en el botón de cerrar
       (closeButton as HTMLElement).click();
     }
   }
 
-
-  //Obtener resultados 
+  // Obtener resultados 
   totalProductos: number = 0;
   Solo10: number = 0;
 
   actualizarTotalProductos() {
     this.totalProductos = this.obtenerSiguienteId() - 1;
-    //Solo mostrar hasta 5 resultados
     this.Solo10 = this.totalProductos > 5 ? 5 : this.totalProductos;
   }
-  // Llamar a actualizarTotalProductos cada vez que productos cambie
+
   ngAfterViewChecked() {
     this.actualizarTotalProductos();
   }
