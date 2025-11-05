@@ -1,0 +1,70 @@
+<div class="p-6 bg-white rounded-lg">
+  <h3 class="text-xl font-semibold text-gray-900 mb-4 text-center">
+    Crear cuenta
+  </h3>
+
+  <form (ngSubmit)="register()" class="space-y-4">
+    <div>
+      <label class="block mb-1 text-sm font-medium text-gray-700">Nombre</label>
+      <input
+        type="text"
+        name="name"
+        [(ngModel)]="name"
+        required
+        placeholder="Tu nombre"
+        class="w-full border border-gray-300 rounded-lg p-2.5 focus:ring-2 focus:ring-blue-500"
+      />
+    </div>
+
+    <div>
+      <label class="block mb-1 text-sm font-medium text-gray-700">Correo</label>
+      <input
+        type="email"
+        name="email"
+        [(ngModel)]="email"
+        required
+        placeholder="tu@correo.com"
+        class="w-full border border-gray-300 rounded-lg p-2.5 focus:ring-2 focus:ring-blue-500"
+      />
+    </div>
+
+    <div>
+      <label class="block mb-1 text-sm font-medium text-gray-700">Contraseña</label>
+      <input
+        type="password"
+        name="password"
+        [(ngModel)]="password"
+        required
+        placeholder="********"
+        class="w-full border border-gray-300 rounded-lg p-2.5 focus:ring-2 focus:ring-blue-500"
+      />
+    </div>
+
+    <!-- Selector de rol -->
+    <div>
+      <label class="block mb-1 text-sm font-medium text-gray-700">Rol</label>
+      <select
+        name="role"
+        [(ngModel)]="rol"
+        required
+        class="w-full border border-gray-300 rounded-lg p-2.5 bg-white focus:ring-2 focus:ring-blue-500"
+      >
+        <option value="" disabled selected>Selecciona un rol</option>
+        <option *ngFor="let r of roles" [value]="r.value">
+          {{ r.label }}
+        </option>
+      </select>
+    </div>
+
+    <button
+      type="submit"
+      class="w-full bg-blue-600 text-white font-semibold py-2 rounded-lg hover:bg-blue-700 transition"
+    >
+      Registrarse
+    </button>
+  </form>
+
+  <p *ngIf="message" class="mt-4 text-green-600 text-sm text-center">
+    {{ message }}
+  </p>
+</div>
