@@ -1,18 +1,25 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, afterNextRender } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { initFlowbite } from 'flowbite';
+import { Register } from '../register/register';
 
 @Component({
   selector: 'app-login',
-  imports: [RouterOutlet, CommonModule, FormsModule],
+  imports: [RouterOutlet, CommonModule, FormsModule, Register],
   templateUrl: './login.html',
   styleUrl: './login.css',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Login {
   username: string = '';
   password: string = '';
   message: string = '';
+
+  constructor() {
+    afterNextRender(() => initFlowbite());
+  }
 
   login(){
     if(this.username === 'admin' && this.password === '123456'){
@@ -22,8 +29,8 @@ export class Login {
     }
   }
 
-  register(){
-    this.message = '🔔Funcionalidad de registro no implementada aún.';
-  }
+  // register(){
+  //   this.message = '🔔Funcionalidad de registro no implementada aún.';
+  // }
 
 }
