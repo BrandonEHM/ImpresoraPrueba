@@ -1,8 +1,14 @@
 import { Routes } from '@angular/router';
 import { Sidebar } from './components/sidebar/sidebar';
 import { UsuariosComponent } from './components/usuarios/usuarios.component';
+import { Login } from './components/login/login';
 
 export const routes: Routes = [
+    {
+        path: 'login',
+        component: Login,
+        title: 'Iniciar sesión'
+    },
     {
         path: 'admin',
         component: Sidebar,
@@ -22,7 +28,11 @@ export const routes: Routes = [
     },
     {
         path: '',
-        redirectTo: '/admin',
+        redirectTo: 'login',
         pathMatch: 'full'
+    },
+    {
+        path: '**',
+        redirectTo: 'login' // para rutas inexistentes
     }
 ];
