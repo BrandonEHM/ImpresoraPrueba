@@ -7,6 +7,7 @@ import { EditarProducto } from './components/editar-producto/editar-producto';
 import { Paginacion } from './components/paginacion/paginacion';
 import { InterfazEditarProductos } from './components/interfaz-editar-productos/interfaz-editar-productos';
 
+import { Productos } from './components/productos/productos';
 export const routes: Routes = [
   /*{ path: '', redirectTo: '/interfaz-editar-productos', pathMatch: 'full' },
   { path: 'interfaz-editar-productos', component: InterfazEditarProductos },
@@ -20,9 +21,9 @@ export const routes: Routes = [
     title: 'Admin',
     children: [
       {
-        path: 'interfaz-editar-productos',
-        component: InterfazEditarProductos,
-        title: 'InterfazEditarProductos'
+        path: 'productos',
+        component: Productos,
+        title: 'Productos'
       },
       
       {
@@ -45,7 +46,7 @@ export const routes: Routes = [
 
       {
         path: '',
-        redirectTo: 'interfaz-editar-productos',
+        redirectTo: 'productos',
         pathMatch: 'full'
       },
     ]
