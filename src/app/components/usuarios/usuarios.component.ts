@@ -2,6 +2,7 @@ import { Component, ChangeDetectionStrategy, afterNextRender, signal } from '@an
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { initFlowbite } from 'flowbite';
+import { Register } from '../register/register';
 
 interface Usuario {
   id: number;
@@ -13,7 +14,7 @@ interface Usuario {
 @Component({
   selector: 'app-usuarios',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, Register],
   templateUrl: './usuarios.component.html',
   styleUrl: './usuarios.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
