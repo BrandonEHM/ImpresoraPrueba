@@ -11,7 +11,16 @@
   <!-- Tabla de usuarios -->
   <div class="overflow-x-auto">
     <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+      <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 items-center justify-center">
+        <tr>
+          <th scope="col" class="px-6 py-3">Usuario</th>
+          <th scope="col" class="px-6 py-3">Nombre</th>
+          <th scope="col" class="px-6 py-3">ID Numérico</th>
+          <th scope="col" class="px-6 py-3">Correo</th>
+          <th scope="col" class="px-6 py-3 text-right">Acciones</th>
+        </tr> 
       <tbody>
+
         @for (usuario of usuarios(); track usuario.id) {
           <tr class="border-b border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800">
             <!-- Avatar y estado -->
@@ -35,16 +44,19 @@
 
             <!-- ID -->
             <td class="px-6 py-4">
-              <span class="text-gray-500 dark:text-gray-400">ID: {{ usuario.idNumerico }}</span>
+              <span class="text-gray-500 dark:text-gray-400">{{ usuario.idNumerico }}</span>
+            </td>
+
+            <!-- Correo -->
+            <td class="px-6 py-4">
+              <span class="text-gray-500 dark:text-gray-400">{{ usuario.correo }}</span>  
             </td>
 
             <!-- Acciones -->
             <td class="px-6 py-4 text-right space-x-2">
               <!-- Botón Editar -->
               <button
-                (click)="seleccionarParaEditar(usuario)"
-                data-modal-target="edit-modal"
-                data-modal-toggle="edit-modal"
+                (click)="abrirEdicion(usuario)"             
                 class="inline-flex items-center justify-center w-10 h-10 text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 rounded-full dark:bg-blue-500 dark:hover:bg-blue-600 dark:focus:ring-blue-800 transition-colors"
                 type="button">
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -55,9 +67,7 @@
 
               <!-- Botón Eliminar -->
               <button
-                (click)="seleccionarParaEliminar(usuario)"
-                data-modal-target="delete-modal"
-                data-modal-toggle="delete-modal"
+                (click)="abrirEliminar(usuario)"
                 class="inline-flex items-center justify-center w-10 h-10 text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:ring-red-300 rounded-full dark:bg-red-500 dark:hover:bg-red-600 dark:focus:ring-red-800 transition-colors"
                 type="button">
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -115,6 +125,15 @@
               [(ngModel)]="usuario.idNumerico"
               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
               placeholder="ID del usuario">
+          </div>
+          <div>
+            <label for="edit-correo" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Correo</label>
+            <input
+              type="email"
+              id="edit-correo"
+              [(ngModel)]="usuario.correo"
+              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
+              placeholder="Correo del usuario">
           </div>
 
           <div class="flex items-center">
