@@ -1,6 +1,7 @@
 import { Component, ChangeDetectionStrategy, ChangeDetectorRef, afterNextRender, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { Register } from '../register/register';
 import { initFlowbite, Modal } from 'flowbite';
 
 interface Usuario {
@@ -14,7 +15,7 @@ interface Usuario {
 @Component({
   selector: 'app-usuarios',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, Register],
   templateUrl: './usuarios.component.html',
   styleUrl: './usuarios.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
