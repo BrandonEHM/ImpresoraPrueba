@@ -37,7 +37,7 @@ export class Productos {
 
   // Signal para el manejar busquedas
   Busqueda = signal<string>('');
-  
+
   // Computed para filtrar productos segun la busqueda
   productosFiltrados = computed(() => {
     const termino = this.Busqueda().toLowerCase().trim();
@@ -123,15 +123,15 @@ export class Productos {
   }
 
   // Obtener resultados 
-  totalProductos: number = 0;
-  Solo10: number = 0;
-
-  actualizarTotalProductos() {
-    this.totalProductos = this.obtenerSiguienteId() - 1;
-    this.Solo10 = this.totalProductos > 5 ? 5 : this.totalProductos;
-  }
-
-  ngAfterViewChecked() {
-    this.actualizarTotalProductos();
-  }
+  /* totalProductos: number = 0;
+   Solo10: number = 0;
+ 
+   actualizarTotalProductos() {
+     this.totalProductos = this.obtenerSiguienteId() - 1;
+     this.Solo10 = this.totalProductos > 5 ? 5 : this.totalProductos;
+   }
+ 
+   ngAfterViewChecked() {
+     this.actualizarTotalProductos();
+   }*/
 }

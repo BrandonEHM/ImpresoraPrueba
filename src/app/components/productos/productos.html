@@ -1,21 +1,43 @@
 <div class="bg-gray-50 text-gray-800 font-sans grid  mx-auto my-auto p-10">
 
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-        <div class="pb-4 bg-white dark:bg-gray-900">
-            <label for="table-search" class="sr-only">Search</label>
-            <div class="relative mt-1">
-                <div class="absolute inset-y-0 rtl:inset-r-0 start-0 flex items-center ps-3 pointer-events-none">
-                    <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
-                        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
-                    </svg>
+        <div class="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 px-6 py-4">
+            <h2 class="text-2xl font-semibold text-gray-900 dark:text-white flex justify-center">Productos</h2>
+        </div>
+        <div class="relative">
+            <div class="pb-2 bg-white dark:bg-gray-900 flex items-center justify-between">
+                <div class="pt-2 px-2">
+                    <label for="table-search" class="sr-only">Search</label>
+                    <div class="relative mt-1">
+                        <div
+                            class="absolute inset-y-0 rtl:inset-r-0 start-0 flex items-center ps-3 pointer-events-none">
+                            <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
+                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+                            </svg>
+                        </div>
+                        <input type="text" id="table-search" (input)="actualizarBusqueda($event)" [value]="Busqueda()"
+                            class="block pt-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            placeholder="Search for items">
+                    </div>
                 </div>
-                <input type="text" id="table-search" (input)="actualizarBusqueda($event)" [value]="Busqueda()"
-                    class="block pt-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    placeholder="Search for items">
+
+                <!-- //------------------------ Botón de agregar y que dirige al modal -----------------------------// -->
+                <div class="px-2">
+                    <button (click)="abrirModalAgregar()"
+                        class="font-semibold rounded-lg cursor-pointer transition-all bg-green-500 text-white px-6 py-2 rounded-lg 
+                        border-green-600 border-b-[4px] hover:brightness-110 hover:-translate-y-[1px] hover:border-b-[6px]
+                        active:border-b-[2px] active:brightness-90 active:translate-y-[2px]"
+                        type="button">
+                        Agregar
+                    </button>
+                </div>
+
             </div>
         </div>
+
+
         <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                 <tr>
@@ -55,7 +77,7 @@
                         {{ producto.descuento }}%
                     </td>
 
-                    <td class="px-6 py-4">
+                    <td class="px-6 py-4 left-0 space-x-2">
                         <!-- Botón Editar -->
                         <button (click)="seleccionarParaEditar(producto)" data-modal-target="edit-modal"
                             data-modal-toggle="edit-modal"
@@ -130,14 +152,6 @@
         </div>
     </div>
 
-<!-- //------------------------ Botón de agregar y que dirige al modal -----------------------------// -->
-    <div class="flex justify-end max-w-md mx-auto mt-12">
-        <button (click)="abrirModalAgregar()"
-            class="bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-6 rounded-lg shadow transition"
-            type="button">
-            Agregar
-        </button>
-    </div>
 
     <!-- ---------------Componente del Modal Agregar Productos----------------------- -->
     <app-modal-agregar-producto #modalAgregar (productoAgregado)="onProductoAgregado($event)">
@@ -238,9 +252,8 @@
 
     <!-- ****************************  Pagination  ****************************  -->
     <!-- ---------------Componente de Paginacion----------------------- -->
-    <app-paginacion></app-paginacion>
-
-
+    <app-paginacion [TotalResultado]="productosFiltrados().length" [Solo10]="10" [PagActual]="1">
+    </app-paginacion>
 
 
 </div>
