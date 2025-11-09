@@ -6,6 +6,7 @@ import { Login } from './components/login/login';
 import { Paginacion } from './components/paginacion/paginacion';
 import { Productos } from './components/productos/productos';
 import { MuseosList } from './components/museos/museos-list/museos-list';
+import { BoletosList } from './components/boletos/boletos-list/boletos-list';
 export const routes: Routes = [
 
   {
@@ -45,10 +46,11 @@ export const routes: Routes = [
         component: MuseosList,
         title: 'Museos'
       },
+
       {
-        path: '',
-        redirectTo: 'productos',
-        pathMatch: 'full'
+        path: 'boletos',
+        component: BoletosList,
+        title: 'Boletos'
       },
     ]
   },
