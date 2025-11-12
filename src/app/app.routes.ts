@@ -6,6 +6,7 @@ import { Login } from './components/login/login';
 import { Paginacion } from './components/paginacion/paginacion';
 import { Productos } from './components/productos/productos';
 import { MuseosList } from './components/museos/museos-list/museos-list';
+import { FormularioBase } from './components/informes/formulario-base/formulario-base';
 export const routes: Routes = [
 
   {
@@ -49,6 +50,11 @@ export const routes: Routes = [
         path: '',
         redirectTo: 'productos',
         pathMatch: 'full'
+      },
+      {
+        path: 'informes',
+        component: FormularioBase,
+        title: 'Informes'
       },
     ]
   },
