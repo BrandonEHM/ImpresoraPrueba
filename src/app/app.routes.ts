@@ -7,6 +7,8 @@ import { Paginacion } from './components/paginacion/paginacion';
 import { Productos } from './components/productos/productos';
 import { MuseosList } from './components/museos/museos-list/museos-list';
 import { ServiciosList } from './components/servicios/servicios-list/servicios-list';
+import { FormularioBase } from './components/informes/formulario-base/formulario-base';
+
 export const routes: Routes = [
 
   {
@@ -50,6 +52,11 @@ export const routes: Routes = [
         path: 'servicios',
         component: ServiciosList,
         title: 'Servicios'
+      },
+      {
+        path: 'informes',
+        component: FormularioBase,
+        title: 'Informes'
       },
       {
         path: '',
