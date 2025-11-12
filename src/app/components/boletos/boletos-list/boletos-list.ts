@@ -4,6 +4,7 @@ import { Paginacion } from "../../paginacion/paginacion";
 import { BoletosCreate } from '../boletos-create/boletos-create';
 import { BoletosDelete } from '../boletos-delete/boletos-delete';
 import { BoletosEdit } from '../boletos-edit/boletos-edit';
+import { initFlowbite } from 'flowbite';
 
 interface Boleto {
   id: number;
@@ -29,6 +30,10 @@ boletos = signal<Boleto[]>([
     { id: 5, nombre: 'Vip', price: 76, discount: 100 },
 ]);
 
+  // Esto se ejecuta cada vez que el componente se renderiza
+  ngAfterViewInit() {
+    initFlowbite(); // re-inicializa todos los modales, dropdowns, etc.
+  }
 
 
   deleteBoleto(id: number) {

@@ -3,6 +3,7 @@ import { MuseosEdit } from "../museos-edit/museos-edit";
 import { MuseosDelete } from "../museos-delete/museos-delete";
 import { MuseosCreate } from "../museos-create/museos-create";
 import { Paginacion } from "../../paginacion/paginacion";
+import { initFlowbite } from 'flowbite';
 
 interface Museo {
   id: number;
@@ -25,6 +26,10 @@ export class MuseosList {
     { id: 4, nombre: 'Museo de Antropología', responsable: 'Ana Gómez', ubicacion: 'Calle 321, Col. Centro, C.P. 98000, Zacatecas, MX' },
   ]);
 
+    ngAfterViewInit() {
+      initFlowbite(); // re-inicializa todos los modales, dropdowns, etc.
+    }
+  
   deleteMuseo(id: number) {
     this.museos.set(this.museos().filter(museo => museo.id !== id));
   }

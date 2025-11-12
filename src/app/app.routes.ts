@@ -7,6 +7,9 @@ import { Paginacion } from './components/paginacion/paginacion';
 import { Productos } from './components/productos/productos';
 import { MuseosList } from './components/museos/museos-list/museos-list';
 import { BoletosList } from './components/boletos/boletos-list/boletos-list';
+
+import { ServiciosList } from './components/servicios/servicios-list/servicios-list';
+
 export const routes: Routes = [
 
   {
@@ -46,11 +49,21 @@ export const routes: Routes = [
         component: MuseosList,
         title: 'Museos'
       },
-
       {
+
         path: 'boletos',
         component: BoletosList,
         title: 'Boletos'
+      },
+      {
+        path: 'servicios',
+        component: ServiciosList,
+        title: 'Servicios'
+      },
+      {
+        path: '',
+        redirectTo: 'productos',
+        pathMatch: 'full'
       },
     ]
   },
