@@ -6,6 +6,8 @@ import { Login } from './components/login/login';
 import { Paginacion } from './components/paginacion/paginacion';
 import { Productos } from './components/productos/productos';
 import { MuseosList } from './components/museos/museos-list/museos-list';
+import { BoletosList } from './components/boletos/boletos-list/boletos-list';
+
 import { ServiciosList } from './components/servicios/servicios-list/servicios-list';
 import { FormularioBase } from './components/informes/formulario-base/formulario-base';
 
@@ -47,6 +49,12 @@ export const routes: Routes = [
         path: 'museos',
         component: MuseosList,
         title: 'Museos'
+      },
+      {
+
+        path: 'boletos',
+        component: BoletosList,
+        title: 'Boletos'
       },
       {
         path: 'servicios',
