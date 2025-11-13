@@ -4,6 +4,8 @@ import { TipoInforme } from '../types/informe';
 import { FormularioVisitantes } from "../formulario-visitantes/formulario-visitantes";
 import { FormularioIngresos } from "../formulario-ingresos/formulario-ingresos";
 
+import { initFlowbite } from 'flowbite';
+
 @Component({
   selector: 'app-formulario-base',
   imports: [ReactiveFormsModule, FormularioVisitantes, FormularioIngresos],
@@ -27,6 +29,10 @@ export class FormularioBase {
     this.informeForm.get('reportType')?.valueChanges.subscribe(value => {
       this.tipoInformeAcual.set(value as TipoInforme);
     });
+  }
+
+  ngAfterViewInit() {
+    initFlowbite();
   }
 
   onSubmit() {
