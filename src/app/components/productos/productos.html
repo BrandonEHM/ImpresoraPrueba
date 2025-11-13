@@ -252,8 +252,11 @@
 
     <!-- ****************************  Pagination  ****************************  -->
     <!-- ---------------Componente de Paginacion----------------------- -->
-    <app-paginacion [TotalResultado]="productosFiltrados().length" [Solo10]="10" [PagActual]="1">
-    </app-paginacion>
+     <div class="mt-4 flex justify-center items-center">
+         <app-paginacion [TotalResultado]="productosFiltrados().length" [Solo10]="10" [PagActual]="1">
+         </app-paginacion>
+
+     </div>
 
 
 </div>
