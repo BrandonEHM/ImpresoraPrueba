@@ -5,7 +5,13 @@ import { Login } from './components/login/login';
 
 import { Paginacion } from './components/paginacion/paginacion';
 import { Productos } from './components/productos/productos';
+import { MuseosList } from './components/museos/museos-list/museos-list';
+import { BoletosList } from './components/boletos/boletos-list/boletos-list';
+
+import { ServiciosList } from './components/servicios/servicios-list/servicios-list';
+import { FormularioBase } from './components/informes/formulario-base/formulario-base';
 import { Agenda } from './components/agenda/agenda';
+
 export const routes: Routes = [
 
   {
@@ -40,7 +46,27 @@ export const routes: Routes = [
         component: Paginacion,
         title: 'Paginacion'
       },
+      {
+        path: 'museos',
+        component: MuseosList,
+        title: 'Museos'
+      },
+      {
 
+        path: 'boletos',
+        component: BoletosList,
+        title: 'Boletos'
+      },
+      {
+        path: 'servicios',
+        component: ServiciosList,
+        title: 'Servicios'
+      },
+      {
+        path: 'informes',
+        component: FormularioBase,
+        title: 'Informes'
+      },
       {
         path: '',
         redirectTo: 'productos',
@@ -59,7 +85,6 @@ export const routes: Routes = [
       }
     ]
   },
-
   {
     path: '',
     redirectTo: 'login',

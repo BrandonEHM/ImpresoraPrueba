@@ -1,13 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, afterNextRender } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { initFlowbite } from 'flowbite';
-import { Register } from '../register/register';
 
 @Component({
   selector: 'app-login',
-  imports: [RouterOutlet, CommonModule, FormsModule, Register],
+  imports: [CommonModule, FormsModule],
   templateUrl: './login.html',
   styleUrl: './login.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
