@@ -5,6 +5,8 @@
 @source "../node_modules/flowbite";
 @source "../node_modules/flowbite-datepicker";
 
+@variant dark (&:where(.dark, .dark *));
+
 @theme {
     --color-background-dark: oklch(37.3% 0.034 259.733);
     --color-background-light: oklch(95.4% 0.038 75.164);

@@ -20,9 +20,10 @@ export class Sidebar {
   }
 }
 */
-import { Component, ChangeDetectionStrategy, afterNextRender} from '@angular/core';
+import { Component, ChangeDetectionStrategy, afterNextRender, inject} from '@angular/core';
 import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
 import { initFlowbite } from 'flowbite';
+import { ThemeService } from '../../services/theme.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -32,8 +33,13 @@ import { initFlowbite } from 'flowbite';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Sidebar {
+  protected readonly themeService = inject(ThemeService);
 
   constructor() {
     afterNextRender(() => initFlowbite());
+  }
+
+  toggleTheme(): void {
+    this.themeService.toggleTheme();
   }
 }
