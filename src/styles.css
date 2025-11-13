@@ -4,3 +4,15 @@
 @plugin "flowbite/plugin";
 @source "../node_modules/flowbite";
 @source "../node_modules/flowbite-datepicker";
+
+@theme {
+    --color-background-dark: oklch(37.3% 0.034 259.733);
+    --color-background-light: oklch(95.4% 0.038 75.164);
+
+    --color-primary-dark: oklch(27.8% 0.033 256.848); /* bg-gray-800 */
+    --color-secondary-dark: oklch(37.3% 0.034 259.733); /* bg-gray-700 */
+
+    --color-primary-light: oklch(87.2% 0.01 258.338); /* bg-gray-300 */
+    --color-secondary-light: oklch(96.7% 0.003 264.542); /* bg-gray-100 */
+    --color-thirdary-light: oklch(92.8% 0.006 264.531); /* bg-gray-200 */
+}

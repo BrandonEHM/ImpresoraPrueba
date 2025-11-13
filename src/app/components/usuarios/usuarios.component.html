@@ -4,11 +4,11 @@
 
 <div class="w-full bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden">
   <!-- Header -->
-  <div class="bg-white text-center dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 px-6 py-4">
+  <div class="bg-white text-center dark:bg-gray-800 border-b border-gray-200 dark:border-secondary-dark px-6 py-4">
     <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Usuarios</h2>
   </div>
   <div class="relative">
-    <div class="flex bg-white dark:bg-gray-900 py-2 px-6 justify-between border-b border-gray-200 dark:border-gray-700">
+    <div class="flex bg-primary-light dark:bg-gray-900 py-2 px-6 justify-between border-b border-gray-200 dark:border-secondary-dark">
       <div>
         <label for="search-users" class="block mb-2.5 text-sm font-medium text-heading sr-only ">search</label>
         <div class="relative">
@@ -17,7 +17,7 @@
                 <path stroke="currentColor" stroke-linecap="round" stroke-width="2.3" d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z"/>
               </svg>
           </div>
-          <input type="search-users" id="search-users" class="block p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Buscar por usuario" required />
+          <input type="search-users" id="search-users" class="block p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-secondary-dark dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Buscar por usuario" required />
         </div>
       </div>
 
@@ -31,7 +31,7 @@
   <!-- Tabla de usuarios -->
   <div class="overflow-x-auto">
     <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-      <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 items-center justify-center">
+      <thead class="text-xs text-secondary-dark uppercase bg-thirdary-light dark:bg-secondary-dark dark:text-gray-400 items-center justify-center">
         <tr>
           <th scope="col" class="px-6 py-3">Usuario</th>
           <th scope="col" class="px-6 py-3">Nombre</th>
@@ -42,7 +42,7 @@
       <tbody>
 
         @for (usuario of usuarios(); track usuario.id) {
-          <tr class="border-b border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800">
+          <tr class="border-b border-gray-200 dark:border-secondary-dark hover:bg-gray-50 dark:hover:bg-secondary-dark">
             <!-- Avatar y estado -->
             <td class="px-6 py-4 w-16">
               <div class="relative">
@@ -101,6 +101,10 @@
       </tbody>
     </table>
   </div>
+  
+</div>
+<div class="mt-4 flex justify-center items-center">
+  <app-paginacion [TotalResultado]="usuarios().length" [Solo10]="10" [PagActual]="1"></app-paginacion>
 </div>
 
 <!-- Modal de Edición -->
@@ -133,7 +137,7 @@
               type="text"
               id="edit-nombre"
               [(ngModel)]="usuario.nombre"
-              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
+              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-secondary-dark dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
               placeholder="Nombre del usuario">
           </div>
 
@@ -143,7 +147,7 @@
               type="text"
               id="edit-id"
               [(ngModel)]="usuario.idNumerico"
-              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
+              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-secondary-dark dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
               placeholder="ID del usuario">
           </div>
           <div>
@@ -152,7 +156,7 @@
               type="email"
               id="edit-correo"
               [(ngModel)]="usuario.correo"
-              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
+              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-secondary-dark dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
               placeholder="Correo del usuario">
           </div>
 
@@ -161,7 +165,7 @@
               id="edit-activo"
               type="checkbox"
               [(ngModel)]="usuario.activo"
-              class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+              class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-secondary-dark dark:border-gray-600">
             <label for="edit-activo" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Usuario activo</label>
           </div>
         </div>
@@ -179,7 +183,7 @@
             (click)="cancelarEdicion()"
             data-modal-hide="edit-modal"
             type="button"
-            class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
+            class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-secondary-dark dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-secondary-dark">
             Cancelar
           </button>
         </div>
@@ -225,7 +229,7 @@
           (click)="cancelarEliminacion()"
           data-modal-hide="delete-modal"
           type="button"
-          class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
+          class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-secondary-dark dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-secondary-dark">
           No, cancelar
         </button>
       </div>

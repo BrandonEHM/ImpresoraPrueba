@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Register } from '../register/register';
 import { initFlowbite, Modal } from 'flowbite';
+import { Paginacion } from "../paginacion/paginacion";
 
 interface Usuario {
   id: number;
@@ -15,7 +16,7 @@ interface Usuario {
 @Component({
   selector: 'app-usuarios',
   standalone: true,
-  imports: [CommonModule, FormsModule, Register],
+  imports: [CommonModule, FormsModule, Register, Paginacion],
   templateUrl: './usuarios.component.html',
   styleUrl: './usuarios.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
