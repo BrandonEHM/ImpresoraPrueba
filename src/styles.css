@@ -3,8 +3,6 @@
 @import "flowbite/src/themes/default";
 @plugin "flowbite/plugin";
 @source "../node_modules/flowbite";
-<<<<<<< HEAD
-=======
 @source "../node_modules/flowbite-datepicker";
 
 @variant dark (&:where(.dark, .dark *));
@@ -20,4 +18,3 @@
     --color-secondary-light: oklch(96.7% 0.003 264.542); /* bg-gray-100 */
     --color-thirdary-light: oklch(92.8% 0.006 264.531); /* bg-gray-200 */
 }
->>>>>>> 8a9a00c297f8bc33ff893b29993d93258bc2fb7a
