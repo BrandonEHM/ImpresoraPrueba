@@ -5,6 +5,7 @@ import { Login } from './components/login/login';
 
 import { Paginacion } from './components/paginacion/paginacion';
 import { Productos } from './components/productos/productos';
+import { Agenda } from './components/agenda/agenda';
 export const routes: Routes = [
 
   {
@@ -45,6 +46,17 @@ export const routes: Routes = [
         redirectTo: 'productos',
         pathMatch: 'full'
       },
+
+      {
+        path: 'agenda',
+        component: Agenda,
+        title: 'Agenda'
+      },
+      {
+        path: '',
+        redirectTo: 'agenda',
+        pathMatch: 'full'
+      }
     ]
   },
 
