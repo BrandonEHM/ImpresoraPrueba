@@ -7,6 +7,8 @@ import { FullCalendarModule, FullCalendarComponent } from '@fullcalendar/angular
 import { RegistrarEvento } from '../registrar-evento/registrar-evento';
 import { initFlowbite } from 'flowbite';
 import { CommonModule, DatePipe } from '@angular/common';
+import { ThemeService } from '../../services/theme.service';
+import esLocale from '@fullcalendar/core/locales/es';
 
 interface Evento {
   title: string;
@@ -48,6 +50,7 @@ export class Agenda {
   // --- OPCIONES DEL CALENDARIO ---
   calendarOptions: CalendarOptions = {
     plugins: [dayGridPlugin, timeGridPlugin, interactionPlugin],
+    locale: esLocale,
     initialView: 'dayGridMonth',
     selectable: true,
     editable: false,
@@ -65,7 +68,7 @@ export class Agenda {
     initFlowbite(); // re-inicializa todos los modales, dropdowns, etc.
   }
 
-  constructor(private cdr: ChangeDetectorRef) {
+  constructor(private cdr: ChangeDetectorRef, private themeService: ThemeService) {
     // Cargar eventos y generar mapa de conteos inicial
     this.calendarOptions.events = this.eventos;
     this.recomputarConteo();
