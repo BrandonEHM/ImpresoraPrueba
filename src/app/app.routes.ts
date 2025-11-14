@@ -10,6 +10,7 @@ import { BoletosList } from './components/boletos/boletos-list/boletos-list';
 
 import { ServiciosList } from './components/servicios/servicios-list/servicios-list';
 import { FormularioBase } from './components/informes/formulario-base/formulario-base';
+import { Agenda } from './components/agenda/agenda';
 
 export const routes: Routes = [
 
@@ -71,6 +72,17 @@ export const routes: Routes = [
         redirectTo: 'productos',
         pathMatch: 'full'
       },
+
+      {
+        path: 'agenda',
+        component: Agenda,
+        title: 'Agenda'
+      },
+      {
+        path: '',
+        redirectTo: 'agenda',
+        pathMatch: 'full'
+      }
     ]
   },
   {

@@ -9,6 +9,7 @@ import { ThemeService } from './services/theme.service';
   templateUrl: './app.html',
   styleUrls: ['./app.css']
 })
+
 export class App {
   protected readonly title = signal('izc-pos-frontend');
   private readonly themeService = inject(ThemeService); // Inicializa el servicio
