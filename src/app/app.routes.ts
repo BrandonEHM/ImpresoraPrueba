@@ -12,6 +12,7 @@ import { BoletosList } from './components/boletos/boletos-list/boletos-list';
 import { ServiciosList } from './components/servicios/servicios-list/servicios-list';
 import { FormularioBase } from './components/informes/formulario-base/formulario-base';
 import { Agenda } from './components/agenda/agenda';
+import { AgendaOperador } from './components/operador/agenda/agenda';
 
 export const routes: Routes = [
 
@@ -26,6 +27,7 @@ export const routes: Routes = [
     component: Sidebar,
     title: 'Admin',
     children: [
+
       {
         path: 'usuarios',
         component: UsuariosComponent,
@@ -97,37 +99,19 @@ export const routes: Routes = [
     component: SidebarOperador,
     title: 'Operador',
     children: [
-    {
-      path: '',
-      redirectTo: 'productos',
+      {
+        path: '',
+        redirectTo: 'productos',
       pathMatch: 'full'
-    },
-   /* {
-      path: 'productos',
-      component: Productos,
-      title: 'Productos'
-    },
-    {
-      path: 'servicios',
-      component: ServiciosList,
-      title: 'Servicios'
-    },
-    {
-      path: 'boletos',
-      component: ,
-      title: 'Boletos'
-    },
-    {
-      path: 'agendar',
-      component: ,
-      title: 'Agendar'
-    }
-    {
-      path: 'visitantes',
-      component: ,
-      title: 'Visitantes'
-    }
-      */
+      },
+
+      {
+
+        path: 'agendar',
+        component: AgendaOperador,
+        title: 'Agendar'
+
+      },
     ]
   },
 
