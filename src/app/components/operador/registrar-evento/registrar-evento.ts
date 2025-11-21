@@ -21,6 +21,7 @@ export class RegistrarEventoOperador {
     fecha_fin: new FormControl('', [Validators.required]),
     estado: new FormControl('', [Validators.required]),
     forma_pago: new FormControl('', [Validators.required]),
+    total: new FormControl('', [Validators.required, Validators.min(0)]),
   });
 
   registrarEventoOperador() {

@@ -1,13 +1,23 @@
 <!-- Botón que abre el modal -->
-<button
-  type="button"
-  data-modal-target="registerEventoButtonModal"
-  data-modal-toggle="registerEventoButtonModal"
-  class="w-full bg-blue-600 text-white font-semibold py-2 rounded-lg hover:bg-blue-700 transition"
->
-  Registrar evento
-</button>
+<div class="mt-8 flex justify-between">
+  <button
+    type="button"
+    data-modal-target="registerEventoButtonModal"
+    data-modal-toggle="registerEventoButtonModal"
+    class="bg-green-600 text-white font-semibold px-6 py-2 rounded-lg hover:bg-green-700 transition"
+  >
+    Registrar evento
+  </button>
 
+  <button
+    type="button"
+    data-modal-target="editEventoButtonModal"
+    data-modal-toggle="editEventoButtonModal"
+    class="bg-blue-600 text-white font-semibold px-6 py-2 rounded-lg hover:bg-blue-700 transition"
+  >
+    Editar evento
+  </button>
+</div>
 <!-- Modal -->
 <div
   id="registerEventoButtonModal"
@@ -107,6 +117,16 @@
               <option value="tarjeta_credito">Tarjeta de crédito</option>
             </select>
           </div>
+          <!-- Total -->
+          <div>
+            <label class="block mb-1 text-sm font-medium text-gray-700">Total</label>
+            <input
+              type="number"
+              formControlName="total"
+              placeholder="Monto total"
+              class="w-full border rounded-lg p-2.5"
+            />
+          </div>          
 
           <button
             type="submit"
@@ -114,6 +134,8 @@
           >
             Registrar evento
           </button>
+
+
         </form>
 
         <p *ngIf="message" class="mt-4 text-green-600 text-sm text-center">
