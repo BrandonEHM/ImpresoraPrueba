@@ -1,6 +1,5 @@
 import { Routes } from '@angular/router';
 import { Sidebar } from './components/sidebar/sidebar';
-import { SidebarOperador } from './components/operador/sidebar/sidebar';
 import { UsuariosComponent } from './components/usuarios/usuarios.component';
 import { Login } from './components/login/login';
 
@@ -15,6 +14,8 @@ import { Agenda } from './components/agenda/agenda';
 import { BoletosFormulario } from './components/operador-components/boletos/boletos-formulario/boletos-formulario';
 import { BoletosFormList } from './components/operador-components/boletos/boletos-form-list/boletos-form-list';
 import { ProductosListOp } from './components/operador-components/boletos/productos-list-op/productos-list-op';
+import { SidebarOperador } from './components/operador-components/sidebar/sidebar';
+
 
 export const routes: Routes = [
 
@@ -76,22 +77,6 @@ export const routes: Routes = [
         redirectTo: 'productos',
         pathMatch: 'full'
       },
-      {
-        path: 'boletosform',
-        component: BoletosFormulario,
-        title: 'boletosform'
-      },
-
-      {
-        path: 'boletosformlist',
-        component: BoletosFormList,
-        title: 'boletosformlist'
-      },
-      {
-        path: 'productoslistop',
-        component: ProductosListOp,
-        title: 'ProductosOP'
-      },
 
       {
         path: 'agenda',
@@ -115,38 +100,43 @@ export const routes: Routes = [
     path: 'operador',
     component: SidebarOperador,
     title: 'Operador',
-    children: [
-    {
-      path: '',
-      redirectTo: 'productos',
-      pathMatch: 'full'
-    },
-   /* {
-      path: 'productos',
-      component: Productos,
-      title: 'Productos'
-    },
-    {
-      path: 'servicios',
-      component: ServiciosList,
-      title: 'Servicios'
-    },
-    {
-      path: 'boletos',
-      component: ,
-      title: 'Boletos'
-    },
-    {
-      path: 'agendar',
-      component: ,
-      title: 'Agendar'
-    }
-    {
-      path: 'visitantes',
-      component: ,
-      title: 'Visitantes'
-    }
-      */
+    
+children: [
+      {
+        path: '',
+        redirectTo: 'productos',
+        pathMatch: 'full'
+      },
+
+      {
+        path: 'productos',
+        component: ProductosListOp,
+        title: 'Productos'
+      },
+
+      {
+        path: 'servicios',
+        component: ServiciosList,
+        title: 'Servicios'
+      },
+      {
+        path: 'visitantes',
+        component: BoletosFormulario,
+        title: 'FormVisitantes'
+      },
+
+      {
+        path: 'boletos',
+        component: BoletosFormList,
+        title: 'Boletos'
+      },
+      /*{
+        path: 'agendar',
+        component: ,
+        title: 'Agendar'
+      },*/
+
+
     ]
   },
 
@@ -155,6 +145,12 @@ export const routes: Routes = [
     redirectTo: 'login' // para rutas inexistentes
   }
 ];
+
+
+
+
+
+
 
 
 
