@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { Sidebar } from './components/sidebar/sidebar';
+import { SidebarOperador } from './components/operador/sidebar/sidebar';
 import { UsuariosComponent } from './components/usuarios/usuarios.component';
 import { Login } from './components/login/login';
 
@@ -109,6 +110,46 @@ export const routes: Routes = [
     redirectTo: 'login',
     pathMatch: 'full'
   },
+
+  {
+    path: 'operador',
+    component: SidebarOperador,
+    title: 'Operador',
+    children: [
+    {
+      path: '',
+      redirectTo: 'productos',
+      pathMatch: 'full'
+    },
+   /* {
+      path: 'productos',
+      component: Productos,
+      title: 'Productos'
+    },
+    {
+      path: 'servicios',
+      component: ServiciosList,
+      title: 'Servicios'
+    },
+    {
+      path: 'boletos',
+      component: ,
+      title: 'Boletos'
+    },
+    {
+      path: 'agendar',
+      component: ,
+      title: 'Agendar'
+    }
+    {
+      path: 'visitantes',
+      component: ,
+      title: 'Visitantes'
+    }
+      */
+    ]
+  },
+
   {
     path: '**',
     redirectTo: 'login' // para rutas inexistentes
