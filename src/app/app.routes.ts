@@ -11,11 +11,12 @@ import { BoletosList } from './components/boletos/boletos-list/boletos-list';
 import { ServiciosList } from './components/servicios/servicios-list/servicios-list';
 import { FormularioBase } from './components/informes/formulario-base/formulario-base';
 import { Agenda } from './components/agenda/agenda';
+
 import { BoletosFormulario } from './components/operador-components/boletos/boletos-formulario/boletos-formulario';
 import { BoletosFormList } from './components/operador-components/boletos/boletos-form-list/boletos-form-list';
 import { ProductosListOp } from './components/operador-components/boletos/productos-list-op/productos-list-op';
 import { SidebarOperador } from './components/operador-components/sidebar/sidebar';
-
+import { AgendaOperador } from './components/operador-components/agenda/agenda';
 
 export const routes: Routes = [
 
@@ -30,6 +31,7 @@ export const routes: Routes = [
     component: Sidebar,
     title: 'Admin',
     children: [
+
       {
         path: 'usuarios',
         component: UsuariosComponent,
@@ -100,7 +102,7 @@ export const routes: Routes = [
     path: 'operador',
     component: SidebarOperador,
     title: 'Operador',
-    
+
 children: [
       {
         path: '',
@@ -130,12 +132,14 @@ children: [
         component: BoletosFormList,
         title: 'Boletos'
       },
-      /*{
-        path: 'agendar',
-        component: ,
-        title: 'Agendar'
-      },*/
 
+      {
+
+        path: 'agendar',
+        component: AgendaOperador,
+        title: 'Agendar'
+
+      },
 
     ]
   },
