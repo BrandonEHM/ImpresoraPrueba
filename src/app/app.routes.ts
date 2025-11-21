@@ -11,6 +11,9 @@ import { BoletosList } from './components/boletos/boletos-list/boletos-list';
 import { ServiciosList } from './components/servicios/servicios-list/servicios-list';
 import { FormularioBase } from './components/informes/formulario-base/formulario-base';
 import { Agenda } from './components/agenda/agenda';
+import { BoletosFormulario } from './components/operador-components/boletos/boletos-formulario/boletos-formulario';
+import { BoletosFormList } from './components/operador-components/boletos/boletos-form-list/boletos-form-list';
+import { ProductosListOp } from './components/operador-components/boletos/productos-list-op/productos-list-op';
 
 export const routes: Routes = [
 
@@ -71,6 +74,22 @@ export const routes: Routes = [
         path: '',
         redirectTo: 'productos',
         pathMatch: 'full'
+      },
+      {
+        path: 'boletosform',
+        component: BoletosFormulario,
+        title: 'boletosform'
+      },
+
+      {
+        path: 'boletosformlist',
+        component: BoletosFormList,
+        title: 'boletosformlist'
+      },
+      {
+        path: 'productoslistop',
+        component: ProductosListOp,
+        title: 'ProductosOP'
       },
 
       {
