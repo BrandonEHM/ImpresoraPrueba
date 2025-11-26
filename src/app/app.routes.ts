@@ -12,12 +12,14 @@ import { ServiciosList } from './components/servicios/servicios-list/servicios-l
 import { FormularioBase } from './components/informes/formulario-base/formulario-base';
 import { Agenda } from './components/agenda/agenda';
 
-import { BoletosFormulario } from './components/operador-components/boletos/boletos-formulario/boletos-formulario';
+import { FormVisit } from './components/operador-components/form-visit/form-visit';
 import { BoletosFormList } from './components/operador-components/boletos/boletos-form-list/boletos-form-list';
-import { ProductosListOp } from './components/operador-components/boletos/productos-list-op/productos-list-op';
+import { ProductosListOp } from './components/operador-components/productos/productos-list-op/productos-list-op';
 import { SidebarOperador } from './components/operador-components/sidebar/sidebar';
 import { AgendaOperador } from './components/operador-components/agenda/agenda';
 
+import { BoletosFormulario } from './components/operador-components/boletos/boletos-formulario/boletos-formulario';
+import { ProductosAdd } from './components/operador-components/productos/productos-add/productos-add';
 export const routes: Routes = [
 
   {
@@ -103,7 +105,7 @@ export const routes: Routes = [
     component: SidebarOperador,
     title: 'Operador',
 
-children: [
+    children: [
       {
         path: '',
         redirectTo: 'productos',
@@ -115,6 +117,12 @@ children: [
         component: ProductosListOp,
         title: 'Productos'
       },
+      {
+        path: 'productosadd',
+        component: ProductosAdd,
+        title: 'ProductosADD'
+      },
+
 
       {
         path: 'servicios',
@@ -123,10 +131,14 @@ children: [
       },
       {
         path: 'visitantes',
-        component: BoletosFormulario,
+        component: FormVisit,
         title: 'FormVisitantes'
       },
-
+      {
+        path: 'vistticket',
+        component: BoletosFormulario,
+        title: 'FormTicket'
+      },
       {
         path: 'boletos',
         component: BoletosFormList,

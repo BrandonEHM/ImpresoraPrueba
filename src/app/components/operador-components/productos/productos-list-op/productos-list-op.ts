@@ -1,10 +1,11 @@
+//productos-list-op.ts
 import { Component, ChangeDetectionStrategy, afterNextRender, signal, computed, viewChild, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { initFlowbite } from 'flowbite';
-import { Paginacion } from '../../../paginacion/paginacion';
 
-
+import { ProductosAdd } from '../productos-add/productos-add';
+import { ProductosService } from '../../../../services/productos/productos.service';
 interface Producto {
   id: number;
   nombre: string;
@@ -14,12 +15,16 @@ interface Producto {
 
 @Component({
   selector: 'app-productos-list-op',
-  imports: [CommonModule, FormsModule, Paginacion, ReactiveFormsModule],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, ProductosAdd],
   templateUrl: './productos-list-op.html',
   styleUrl: './productos-list-op.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProductosListOp {
+
+  //Inyectar el servicio
+  private productosService = inject(ProductosService);
+
 
 
   constructor() {
@@ -39,12 +44,10 @@ export class ProductosListOp {
   });
 
 
+  // Obtener productos agregados desde el servicio
+  productos = computed(() => this.productosService.productosAgregados());
 
-  productos = signal<Producto[]>([
-    { id: 1, nombre: 'Café', precio: 20, descuento: 0 },
-    { id: 2, nombre: 'Agua', precio: 20, descuento: 10 },
-    { id: 3, nombre: 'Collar', precio: 150, descuento: 0 },
-  ]);
+
 
   //------------------------SOLO FILTRADO POR BUSQUEDA---------------------
   // Signal para el manejar busquedas
@@ -71,7 +74,9 @@ export class ProductosListOp {
     this.Busqueda.set(input.value);
   }
   //---------------------------------------------------------------------------------------------
-  cantidad = signal<{ [id: number]: number }>({});
+
+  // Obtener cantidades desde el servicio
+  cantidad = computed(() => this.productosService.cantidades());
 
 
   totalProductos = computed(() => {
@@ -92,31 +97,15 @@ export class ProductosListOp {
     return totalDinero;
   });
 
-
+// Métodos actualizados para usar el servicio
   incrementar(producto: Producto) {
-    // Solo incrementar si no se ha alcanzado el máximo total
-
-    const actual = this.cantidad()[producto.id] || 0;
-    this.cantidad.update(val => ({
-      ...val,
-      [producto.id]: actual + 1
-    }));
-
+    this.productosService.incrementarCantidad(producto.id);
   }
 
   decrementar(producto: Producto) {
-    const actual = this.cantidad()[producto.id] || 0;
-    if (actual > 0) {
-      this.cantidad.update(val => ({
-        ...val,
-        [producto.id]: actual - 1
-      }));
-    }
+    this.productosService.decrementarCantidad(producto.id);
   }
 
-  
-  //Herramienta para calcular cambio 
-  // Computed para calcular el cambio
   totalcambio = computed(() => {
     const ingreso = this.montoIngresado();
     const total = this.totalmonto();
@@ -124,12 +113,10 @@ export class ProductosListOp {
   });
 
   ngOnInit() {
-    // Suscribirse a cambios en el formulario para actualizar el signal
     this.FormIngreso.get('ingreso')?.valueChanges.subscribe(valor => {
       const monto = Number(valor) || 0;
       this.montoIngresado.set(monto);
     });
-
   }
 
 }
